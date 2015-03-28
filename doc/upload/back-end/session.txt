@@ -1,0 +1,16 @@
+用户session信息：
+
+URL: {url_prefix}/session/
+
+请求方式：GET
+
+返回：
+	200 OK
+	内容格式：
+		[
+			{"hash":"xxx", "filename":"xxx", "size":xxx, "token":"xxx","chunksize":xxx},
+			{"hash":"xxx", "filename":"xxx", "size":xxx, "token":"xxx","chunksize":xxx},
+			......
+		]
+
+返回一个用户所有文件上传的session信息

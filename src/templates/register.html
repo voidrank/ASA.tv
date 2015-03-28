@@ -1,0 +1,25 @@
+<!--the part will be deleted-->
+{% extends "admin/base_site.html" %}
+{% block content %}
+<!---->
+
+<html>
+  <head>
+    <title>register</title>
+    <script src="{{STATIC_URL}}/angularjs/angular.js"></script>
+    <script src="{{STATIC_URL}}/register/js/controllers.js"></script>
+  </head>
+  <body ng-app="register">
+    <form ng-controller="register" ng-submit="submit()" ng-submit="submit()">
+      username: <input type="text" ng-model="data.username"><p>
+      passwd: <input type="password" ng-model="data.password"><p>
+      again: <input type="password" ng-model="data.repeat_password"><p>
+      email: <input type="text" ng-model="data.email"><p>
+      <input type="submit" ngClick="Submit"></button>
+    </form>
+  </body>
+</html>
+
+<!--the part will be deleted-->
+{% endblock %}
+<!---->

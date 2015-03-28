@@ -1,0 +1,13 @@
+upload.js
+
+Requirement:
+sha256.js
+
+Usage:
+var onStatusChange = function(obj) { // called when progress is changed
+	obj.checksumprog // 0 - 100, progress of checksum
+	obj.checksum // sha256 checksum of file
+	obj.uploadprog // 0 - 100, progress of uploading
+};
+var upload_handler = new Upload(file, onStatusChange);// start uploading
+

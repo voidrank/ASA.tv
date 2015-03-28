@@ -1,0 +1,16 @@
+取消上传:
+
+URL: {url_prefix}/destroy/{token}
+
+GET: 取消本次上传
+Body格式:
+	N/A
+Body内容:
+	无
+正常响应:
+	201 Deleted
+		body为空
+	注意: 即使该token不存在，也会返回201 Deleted.
+
+异常响应:
+	无

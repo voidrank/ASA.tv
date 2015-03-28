@@ -1,0 +1,24 @@
+初始化一个上传:
+
+URL: {url_prefix}/init
+
+POST: 初始化上传请求
+Body格式:
+	json
+Body内容:
+	size: int64 文件的长度 必须
+	hash: string 文件的sha256 hash结果 必须
+	filename: string 文件名 不得包含'\0' '/'和'\\' 必须
+正常响应:
+	201 Initialized
+		body为一个json，其中有一个token，在之后上传中使用。
+
+异常响应:
+	400 Bad Request
+		HTTP请求不合法，或json格式不合法，或json缺少必须项
+		合法HTTP请求的响应body为一个json，其中包含一个errstr，为错误原因
+	403 Forbidden
+		上传文件请求被服务器拒绝，可能的原因为文件名包含非法字符，或参数类型不正确
+		响应body为一个json，其中包含一个errstr，为错误原因
+
+仅仅在video_cms中创建一个session

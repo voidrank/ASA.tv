@@ -1,0 +1,17 @@
+API:
+    search token:
+        method: GET
+        URL: {{prefix}}/media/get_token_by_name
+        format(json):
+            {"token": {{token}} }
+    get video src:
+        method: GET
+        URL: {{prefix}}/media/get_video/{{token}}
+        response-status-code: 206
+
+
+
+Process:
+        GET 
+        URL: {{prefix}}/rec/{{file_name}}
+        response: webpage

@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <script src="{{ STATIC_URL }}bower_components/jquery/dist/jquery.min.js"></script>
+    <link href="{{ STATIC_URL }}bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="{{ STATIC_URL }}bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="{{ STATIC_URL }}bower_components/flat-ui/dist/css/flat-ui.min.css" rel="stylesheet">
+    <script src="{{ STATIC_URL }}bower_components/flat-ui/dist/js/flat-ui.min.js"></script>
+    <script src="{{ STATIC_URL }}angularjs/angular.min.js"></script>
+    <link href="{{ STATIC_URL }}ASA/base.css" rel="stylesheet">
+    {% block head %} 
+    {% endblock %}
+  </head>
+  <body>
+    <div class="top-container" >
+      <nav class="top-container-tab" role="navigation">
+        <div class="navbar-brand">
+          <a class="top-container-tab-href" href="{% url 'index' %}" >
+          首页
+          </a>
+        </div>
+        <div class="navbar-brand">
+          <a class="top-container-tab-href" href="{% url 'homepage' %}">
+            个人中心
+          </a>
+        </div>
+      </nav>
+      <div class="top-container-userinfo">
+        {% if user.is_active %}
+          <div>
+            欢迎, &nbsp;&nbsp;
+            <a href="/homepage"> 
+              {{ user.username }} 
+              <img src="/homepage/avatar/" class="top-container-avatar">
+            </a>
+          </div>
+        {% else %}
+          <div>
+            欢迎，游客
+          </div>
+        {% endif %}
+      </div>
+      <div class="top-container-pic">
+        <img src="{{ STATIC_URL }}homepage/ASA.tv.png" style="width:100%;">
+      </div>
+    </div>
+    {% block content %} 
+    {% endblock %}
+  </body>
+</html>
+

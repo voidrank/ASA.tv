@@ -1,0 +1,48 @@
+Define danmaku format:
+    {
+        "mode"      : num,      #default 1
+        "stime"     : num,     
+        "text"      : string,   
+        "cindex"    : num,
+        "motion"    : array,    #default []
+        "size"      : num,      #default 25
+        "color"     : num,      #default 0xffffff
+    }
+    see more details: github.com/jabbany/CommentCoreLibrary/blob/master/docs/CommentObject.md
+
+
+
+API:
+    get danmaku pool:
+        method: GET
+        URL: {{prefix}}/danmaku/{{token}}
+        response: array of danmaku (danmaku json format)
+
+    danmaku websocket(nodejs+socket.io):
+        URL: {{hostname}}:4000/
+
+    post danmaku to django:
+        method: POST
+        URL: {{prefix}}/danmaku/{{token}}
+
+
+
+Process:
+    1.  GET 
+        URL: {{prefix}}/danmaku/{{token}}
+        response: barrages pool
+    2.  set up websocket
+        URL: {{hostname}}:4000/
+        
+
+
+Note:
+    danmaku sended by user will be resended to
+    user by server
+
+
+
+Requirement:
+    danmaku sended by oneself will be immedately
+    displayed on his/her screen!!
+    DO NOT USE SERVER RESPONSE TO IMPLEMENT IT!

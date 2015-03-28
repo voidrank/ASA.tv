@@ -1,0 +1,28 @@
+.video {
+  margin-top: 10;
+}
+
+.filename {
+  margin-left: 5;
+  overflow: hidden;
+  font-size: 10;
+  width: 120;
+}
+
+.click {
+  margin-top: 5;
+  width: 45;
+  font-size: 7;
+}
+
+.video {
+  height: 150;
+  width: 150;
+  margin-top: 20;
+  margin-left: 20;
+  margin-right: 20;
+}
+
+#main-area {
+  height: 1000px;
+}

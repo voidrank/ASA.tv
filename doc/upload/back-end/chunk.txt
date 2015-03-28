@@ -1,0 +1,41 @@
+chunk相关操作:
+
+URL: {url_prefix}/chunk/{token}
+
+GET: 获取该Session的所有Chunk信息
+Body格式:
+	N/A
+Body内容:
+	无
+正常响应:
+	200 OK
+		body为一个json，为一个array包含所有已经上传的chunk。
+		每个chunk为一个dict，包含'token', 'hash'和'created_at'。
+		'token'和'hash'均为一个字符串，'created_at'为使用ISO格式表示的时间。
+
+异常响应:
+	404 Not Found
+		Session不存在或者已过期被清除
+
+PUT/PATCH: 上传/修改一个Chunk
+Body格式:
+	raw
+Body内容:
+	该Chunk的文件内容
+URL参数:
+	'hash': 该Chunk的sha256 hash值
+	'seq': 该Chunk的序号, 从0开始
+正常响应:
+	201 Stored
+		body为一个json，包含一个'chunk_token'，为上传的chunk的token。
+异常响应:
+	400 Bad Request
+		缺少URL参数
+	403 Forbidden
+		参数类型不正确或者Chunk大小过小
+	404 Not Found
+		Session不存在或者已过期被清除
+	406 Not Acceptable
+		Chunk大小与初始化时申请的大小不同
+	409 Conflict
+		该Seq的Chunk已经被上传(仅PUT)

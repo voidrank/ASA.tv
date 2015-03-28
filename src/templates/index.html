@@ -1,0 +1,40 @@
+{% extends 'ASA/base.html' %}
+
+{% block head %}
+  <script src="{{STATIC_URL}}index/js/index.js"></script>
+  <link href="{{ STATIC_URL }}index/css/index.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div ng-app='index' ng-controller='index'>
+    <div class="container-fluid">
+      <div class="row">
+        
+        <div class="col-md-12" id='main-area' ng-repeat='col in collections'>
+          <div class="col-md-10" >
+
+            <nav class="navbar navbar-default" id="main-area">
+
+              <div>
+                <div ng-repeat="video in video_content track by $index" class="col-md-3 video" title="{$ video.filename $}">
+                  <a  href="/rec/{$ video.rec $}" class="thumbnail">
+                    <img ng-src="/video_cover/{$ video.rec $}" class="">
+                  </a>
+                  <div class="col-md-2 filename">
+                    <a href="/rec/{$ video.rec $}" >{$ video.filename $}</a>
+                  </div>
+                  <span class="glyphicon glyphicon-play click">
+                    {$ video.click_counts $}
+                  </span>
+                </div>
+              </div>
+
+            </nav>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+<div>

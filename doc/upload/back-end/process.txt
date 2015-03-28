@@ -1,0 +1,46 @@
+没有权限的上传被放在了video_cms中，已经被停用
+有权限的上传被放在website
+
+整体来说，上传的过程是这样的
+1. init
+2. chunk put
+3. finalize
+
+解释一些在添加权限管理后增添的新的操作细节
+init:
+	1.检查是否登陆
+	2.创建一个session，创建这个session
+	的目的是管理所有未上传好的chunk
+	(video_cms.Session)
+	3.创建一个关于uploader和Session的关
+	系model(SessionUploaderRecord)，用于
+	记录这个session的是谁创建的，以便
+	上传的管理
+
+chunk put:
+	1.检查权限，是否登录，登陆用户是否为
+	session的uploader
+
+
+finalize:
+	1.检查权限，是否登录，登录用户是否
+	为session的uploader
+	2.删除Session和SessionUploaderRecord
+	两个model中对应的数据（它们已经完成
+	上传的时候用户管理chunk以及权限问题
+	的任务，再也不需要他们了）
+	3.在video_cms中创建该完整的file
+	4. 运行website的cms_plugins中的av函数
+	av filename rec_id
+	其中filename代表该文件在cms对应的文件，
+	默认为/home/{{username}}/{{upload_filename}}
+	rec_id则为改文件在video_cms.file中对应
+	的rec号
+	(av filename rec_id会做如下的事情，
+	创建一个VideoFileAttrib(base为BaseFileAttrib)
+	touch /home/{{username}}/{{upload_filename}},
+	lna video_cms.videofileattrib {{rec_id}} \
+	/home/{{username}}/{{upload_filename}},
+	需要多次强调的是，非cms内的plugins，不应该
+	调用cms.models内的东西，否则很容易破坏权限
+	的逻辑性)

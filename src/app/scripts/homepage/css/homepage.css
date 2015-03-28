@@ -1,0 +1,88 @@
+body {
+  width: 100%;
+}
+
+.main-area {
+  height: 740;
+  position: relative;
+}
+
+#main-area {
+  box-shadow: 10px 10px 0px;
+}
+
+.tab2 {
+  padding-left: 40;
+  padding-top: 40;
+}
+
+.main-area .tab2 .video {
+  margin-top: 10;
+}
+
+.main-area .tab2 .filename {
+  margin-left: 5;
+  overflow: hidden;
+  font-size: 10;
+  width: 120;
+}
+
+.main-area .tab2 .click {
+  margin-top: 5;
+  width: 45;
+  font-size: 7;
+}
+
+.main-area .tab2 .video {
+  height: 150;
+  width: 150;
+  margin-top: 20;
+  margin-left: 20;
+  margin-right: 20;
+}
+
+.tab4 {
+  padding-top: 40;
+  padding-left: 30;
+  padding-right: 30;
+}
+
+.main-area .tab4 .add {
+  margin-left: 150;
+  margin-right: 150;
+  text-align: center;
+  height: auto;
+  width: auto;
+  font-size: 20;
+  cursor: pointer;
+}
+
+.main-area .tab4 #video-upload {
+  display: none;
+}
+
+.main-area .tab4 #video-cover-upload {
+  display: none;
+}
+
+.main-area .tab4 .files_list {
+  margin-top: 50;
+  height: 200;
+}
+
+.main-area .tab4 .progress {
+  height: 40;
+  background-color: #AAAAAA;
+}
+
+.main-area .tab4 .progress #progress-text {
+  font-size: 15;
+  margin-top: 7;
+  margin-left: 215;
+  position: absolute;
+}
+
+.main-area .tab4 #video-cover-preview {
+  height: 314;
+  width: 476;
+}

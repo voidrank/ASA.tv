@@ -1,0 +1,28 @@
+完成上传:
+
+URL: {url_prefix}/store/{token}
+
+GET: 尝试完成本次上传
+Body格式:
+	N/A
+Body内容:
+	无
+正常响应:
+	201 Processed
+		body为一个json，有4个key:
+		'token': 文件在服务器上的token
+		'hash': 文件的hash
+		'filename': 上传时申明的文件名
+		'created': 上传Session建立的时间
+
+异常响应:
+	400 Bad Request
+		上传不完整，有部分Chunk尚未上传。
+
+	404 Not Found
+		Session不存在或者已过期被清除
+
+	406 Not Acceptable
+		文件总长度或者文件Hash值不正确
+
+删除session，建立一个file，在cms创建对应的文件'/home/{{username}}/{{filename}}'

@@ -1,0 +1,5 @@
+{
+    "filename":     "test_file",
+    "chunksize":    65536,
+    "url"     :     "http://localhost:8000/"
+}
