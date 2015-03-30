@@ -18,13 +18,13 @@ var Uploader;
     if (config == null)
       var config = {};
     config['size'] = file.size;
-    if (typeof(config['url']) != undefined)
+    if (typeof(config['url']) == undefined)
       config["url"] = window.location.origin+"/";
-    if (typeof(config['collection']) != undefined)
+    if (typeof(config['collection']) == undefined)
       config['collection'] = ['test'];
-    if (typeof(config['chunksize']) != undefined)
+    if (typeof(config['chunksize']) == undefined)
       config['chunksize'] = 65536;
-    if (typeof(config['filename']) != undefined)
+    if (typeof(config['filename']) == undefined)
       config['filename'] = file.name; 
 
 		/* make ajax */
