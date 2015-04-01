@@ -1,51 +1,31 @@
 // ventor 
 require.config({
-  baseUrl: '/app/bower_components',
+  baseUrl: '/app',
   paths: {
-    'angular': 'angularjs/angular.min',
-    'jquery': 'jquery/dist/jquery.min',
-    'bootstrap': 'bootstrap/dist/js/bootstrap.min',
-    'flat-ui': 'flat-ui/dist/js/flat-ui.min',
-    'domReady': 'domReady/domReady'
+    'jquery': 'bower_components/jquery/dist/jquery.min',
+    'angular': 'bower_components/angular/angular.min',
+    'angular-route': 'bower_components/angular-route/angular-route.min',
+    'angular-resource': 'angular-resource.min',
+    'bootstrap': 'bower_components/bootstrap/dist/js/bootstrap.min',
+    'flat-ui': 'bower_components/flat-ui/dist/js/flat-ui.min',
+    'domReady': 'bower_components/domReady/domReady',
+    'app': 'app',
+    'index': 'scripts/controllers/index'
   },
   shim: {
-    'bootstrap': {
-      deps: ['jquery'],
-      exports: 'bootstrap'
-    },
-    'jquery': {
-      exports: 'jquery'
-    },
-    'flat-ui': {
-      deps: ['jquery', 'bootstrap'],
-      exports: 'flat-ui'
-    },
     'angular': {
-      deps: ['jquery', 'bootstrap'],
       exports: 'angular'
-    }
-  }
+    },
+    'angular-route': ['angular'],
+    'angular-resource': ['angular']
+  },
+  urlArgs: "bust=" + (new Date()).getTime()
 });
 
-require([
-  'angular',
-  'jquery',
-  'bootstrap',
-  'flat-ui',
-  'domReady'
-]);
-
-require.config([
-  
-});
-
-// app
-//
-
-
-// bootstrap render
-define(['angular', 'domReady'], function(angular, domReady){
+require(['domReady', "angular", "app", 'index'], function(domReady, angular){
   domReady(function(){
-    angular.bootstrap(document, ['app']);
+    angular.element().ready(function(){
+      angular.bootstrap(document, ["app"]);
+    });
   });
 });

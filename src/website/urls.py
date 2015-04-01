@@ -53,9 +53,10 @@ urlpatterns_danmaku = patterns(
 )
 
 
-urlpatterns_index = patterns(
+urlpatterns_video_list = patterns(
+    '',
     url(
-        r'^video_list/$',
+        r'video_list/',
         video_list,
         name='video_list'
     )
@@ -130,7 +131,6 @@ urlpatterns_homepage = patterns(
     ),
 )
 
-
 urlpatterns = patterns(
     r'',
     url(r'', include(urlpatterns_perinfo)),
@@ -138,6 +138,6 @@ urlpatterns = patterns(
     url(r'', include(urlpatterns_homepage)),
     url(r'', include(urlpatterns_upload)),
     url(r'', include(urlpatterns_danmaku)),
-    url(r'', include(urlpatterns_index)),
+    url(r'', include(urlpatterns_video_list)),
     url(r'', include(urlpatterns_video_cover)),
 )

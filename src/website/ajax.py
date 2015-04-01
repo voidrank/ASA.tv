@@ -296,7 +296,6 @@ def mygroup(request):
     ))
 
 
-@login_required
 def video_list(request):
     assert 'col' in request.GET
     try:
@@ -305,10 +304,10 @@ def video_list(request):
         raise CollectionNotFound(request.GET['col'])
     return JsonResponse(
         list(map(
-            lambda video:{
+            lambda video: {
                 'rec': video.base.rec,
                 'filename': video.base.filename
-            }, 
+            },
             col.file_set.all()
         )),
         status=201,
