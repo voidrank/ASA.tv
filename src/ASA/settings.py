@@ -45,9 +45,15 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'guardian',
     'ASA',
     'video_cms',
     'website'
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -127,3 +133,6 @@ MEDIA_URL = 'media/'
 # login redirect
 LOGIN_REDIRECT_URL = '/homepage/'
 LOGIN_URL = '/accounts/login/'
+
+# django-guardian
+ANONYMOUS_USER_ID = -1

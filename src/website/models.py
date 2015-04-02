@@ -1,11 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import Group
+
 import video_cms.models
+
 from .fields import ListField
 
 # Create your models here.
 
 
-class SessionExt(models.Model):
+class SessionEXT(models.Model):
     session = models.OneToOneField(
         'video_cms.Session',
         related_name='ext'
@@ -16,19 +19,27 @@ class SessionExt(models.Model):
     collection = models.ForeignKey('Collection')
 
 
-class Collection(models.Model):
-    base = models.OneToOneField(
-        'auth.Group',
-        related_name='ext'
+class Collection(Group):
+    parent_col = models.ForeignKey(
+        'website.Collection',
+        default=None,
+        blank=True,
+        null=True
     )
-    name = ListField(unique=True)
     abstract = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.name)
 
+    class Meta:
+        permissions = (
+            ('group_member', 'Group Member'),
+            ('group_admin', 'Group Admin'),
+            ('group_root', 'Group Root'),
+        )
 
-class File(models.Model):
+
+class FileEXT(models.Model):
     base = models.OneToOneField(
         'video_cms.File',
         related_name='ext',

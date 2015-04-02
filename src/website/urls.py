@@ -1,47 +1,8 @@
 from django.conf.urls import patterns, url, include
 
 from .views import *
-from .ajax import *
-
-urlpatterns_upload = patterns(
-    r'',
-    url(
-        r'^upload/init/?',
-        InitView.as_view(),
-        name='init'
-    ),
-
-    url(
-        r'^upload/chunk/(?P<owner>[a-fA-F0-9]{64})/?',
-        ChunkView.as_view(),
-        name='chunk'
-    ),
-
-    url(
-        r'^upload/store/(?P<owner>[a-fA-F0-9]{64})/?',
-        FinalizeView.as_view(),
-        name='store'
-    ),
-
-    url(
-        r'^upload/destroy/(?P<owner>[a-fA-F0-9]{64}/?)',
-        DestroyView.as_view(),
-        name='destroy'
-    ),
-
-    url(
-        r'^upload/$',
-        PageView.as_view(),
-        name="upload"
-    ),
-
-    url(
-        r'^upload/session/$',
-        SessionsView.as_view(),
-        name='sessions'
-    )
-)
-
+from .upload_ajax import *
+from .collection_ajax import *
 
 urlpatterns_danmaku = patterns(
     '',
@@ -68,16 +29,6 @@ urlpatterns_video_cover = patterns(
         r'^video_cover/(?P<rec>[0-9]+)/$',
         VideoCoverView.as_view(),
         name='video_cover'
-    )
-)
-
-
-urlpatrtns_col = patterns(
-    '',
-    url(
-        r'^collection$',
-        CollectionInfo,
-        name='collection_info'
     )
 )
 
@@ -140,4 +91,5 @@ urlpatterns = patterns(
     url(r'', include(urlpatterns_danmaku)),
     url(r'', include(urlpatterns_video_list)),
     url(r'', include(urlpatterns_video_cover)),
+    url(r'collection', include(urlpatterns_collection))
 )

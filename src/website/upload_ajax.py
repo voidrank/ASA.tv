@@ -6,20 +6,20 @@ try:
 except Exception:
     import json
 
+from django.conf.urls import patterns, url
 from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 from video_cms.models import *
 from django.contrib.auth.decorators import login_required
 
-import video_cms
+from video_cms.models import File
 from video_cms.exceptions import *
 
 from .exceptions import *
 from .models import *
 from .settings import (VIDEO_COVER_DIR,
                        AVATAR_ROOT, AVATAR_SIZE_LIMIT)
-
 
 class InitView(video_cms.upload_views.InitView):
 
@@ -119,8 +119,8 @@ class FinalizeView(video_cms.upload_views.FinalizeView):
             if response.status_code != 201:
                 return response
             data = json.loads(response.content)
-            base = video_cms.models.File.objects.get(token=data['token'])
-            File.objects.create(
+            base = File.objects.get(token=data['token'])
+            FileEXT.objects.create(
                 base=base,
                 collection=col,
                 uploader=request.user
@@ -223,7 +223,7 @@ class VideoCoverView(View):
 
     def post(self, request, rec, *args, **kwargs):
         try:
-            video = video_cms.models.File.objects.get(rec=int(rec))
+            video = File.objects.get(rec=int(rec))
         except Exception:
             return HttpResponse(json.dumps({
                 'status': 'error',
@@ -243,13 +243,6 @@ class VideoCoverView(View):
 
     def dispatch(self, *args, **kwargs):
         return super(VideoCoverView, self).dispatch(*args, **kwargs)
-
-
-@login_required
-def CollectionInfo(request):
-    return JsonResponse(
-        list(Collection.objects.filter(abstract=False))
-    )
 
 
 @login_required
@@ -282,7 +275,7 @@ def myupload(request):
             'filename': video.base.filename,
             'click_counts': 0
         },
-        File.objects.filter(uploader=request.user).order_by('base__rec')[op: op + ct]
+        FileEXT.objects.filter(uploader=request.user).order_by('base__rec')[op: op + ct]
     ))))
 
 
@@ -356,3 +349,37 @@ class AvatarView(View):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(AvatarView, self).dispatch(*args, **kwargs)
+
+
+urlpatterns_upload = patterns(
+    r'',
+    url(
+        r'^upload/init/?',
+        InitView.as_view(),
+        name='init'
+    ),
+
+    url(
+        r'^upload/chunk/(?P<owner>[a-fA-F0-9]{64})/?',
+        ChunkView.as_view(),
+        name='chunk'
+    ),
+
+    url(
+        r'^upload/store/(?P<owner>[a-fA-F0-9]{64})/?',
+        FinalizeView.as_view(),
+        name='store'
+    ),
+
+    url(
+        r'^upload/destroy/(?P<owner>[a-fA-F0-9]{64}/?)',
+        DestroyView.as_view(),
+        name='destroy'
+    ),
+
+    url(
+        r'^upload/session/$',
+        SessionsView.as_view(),
+        name='sessions'
+    )
+)
