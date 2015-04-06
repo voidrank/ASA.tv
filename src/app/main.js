@@ -10,6 +10,7 @@ require.config({
     'angular': 'bower_components/angular/angular',
     'ngRoute': 'bower_components/angular-route/angular-route.min',
     'angular-resource': 'angular-resource.min',
+    'angular-animate': 'bower_components/angular-animate/angular-animate.min',
     'bootstrap': 'bower_components/bootstrap/dist/js/bootstrap.min',
     'flat-ui': 'bower_components/flat-ui/dist/js/flat-ui.min',
     'domReady': 'bower_components/domReady/domReady',
@@ -34,14 +35,17 @@ require.config({
     },
     'angular-resource': {
       deps: ['angular'],
+    },
+    'angular-animate': {
+      deps: ['angular']
     }
   },
   urlArgs: 'v' + (new Date()).getTime()
 });
 
 
-define('app', ['angular', 'ngRoute'], function(angular, ngRoute){
-  var app = angular.module('app', ['ngRoute']);
+define('app', ['angular', 'ngRoute', 'angular-animate'], function(angular, ngRoute){
+  var app = angular.module('app', ['ngRoute', 'ngAnimate']);
   app.config(['$routeProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', "$httpProvider", function($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider){
         app.controllerProvider = $controllerProvider;
         app.compileProvider = $compileProvider;
@@ -76,16 +80,26 @@ define('app', ['angular', 'ngRoute'], function(angular, ngRoute){
   )
   .constant(
     'collectionUrl', urlPrefix + '/collection/'
+  )
+  .constant(
+    'videoCoverUrl', urlPrefix + '/api/video/cover/'
   );
   return app;
 });
 
-define('angularRender', ['domReady', "angular", 'app', 'indexController', 'headerController', 'directive'], function(domReady, angular, app){
-  domReady(function(){
-    angular.element().ready(function(){
-       angular.bootstrap(document, ["app"]);
-    });
-  });
-});
+define('render', 
+  ['domReady', "angular", 'app', 'jquery', 'indexController', 'headerController', 'directive'], 
+  function(domReady, angular, app, $){
+    domReady(function(){
 
-require(['angularRender', 'css']);
+      // angular
+      angular.element().ready(function(){
+         angular.bootstrap(document, ["app"]);
+      });
+
+    });
+  }
+);
+
+requirejs(['render', 'css'], function(){
+});
