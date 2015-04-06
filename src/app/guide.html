@@ -1,7 +1,26 @@
 <html>
+
   <head>
+    <link href="/app/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="/app/bower_components/requirejs/require.js" data-main="/app/main.js"></script>
+  </head>
+
   <body>
+    <div class="header" ng-controller="header">
+      <div class='logo'>
+        <img src='/app/images/logo.jpeg' class="img">
+      </div>
+      <div class='ASA-tv'> ASA.tv </div>
+      <div class="userLogIO" ng-model="userLogIO"> 
+        <div ng-show="userLogIO.authenticated">
+          <homeLink>{{ userLogIO.username }}个人中心</homeLink>&nbsp;&nbsp;&nbsp; <logoutLink>登出</logoutLink>
+        </div>
+        <div ng-hide="userLogIO.authenticated">
+          <loginLink>登陆</loginLink>/<registerLink>注册</registerLink>
+        </div>
+      </div>
+    </div>
     <div ng-view></div>
   </body>
+
 </html>

@@ -67,3 +67,6 @@ src/website/media
 src/website/video_cover
 *.ropeproject
 *migrations
+
+#bower_components
+*bower_components

@@ -1,14 +1,15 @@
-<div ng-controller='index'>
+<div ng-controller='index' class='index'>
   <div class="container-fluid">
     <div class="row">
-
-      <div class="col-md-12" id='main-area' ng-repeat='col in collections'>
-        <div class="col-md-10" >
-
-          <nav class="navbar navbar-default" id="main-area">
-          </nav>
-
-        </div>
+      <div class="col-xs-12">
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="col-xs-1">
+            <a href="#/">首页</a>
+          </li>
+          <li role="presentation" class="col-xs-1" ng-repeat="col in collections track by $index">
+            <a ng-href="{{ collectionUrl }}{{ col.name }}">{{ col.name }}</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

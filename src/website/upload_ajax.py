@@ -21,6 +21,7 @@ from .models import *
 from .settings import (VIDEO_COVER_DIR,
                        AVATAR_ROOT, AVATAR_SIZE_LIMIT)
 
+
 class InitView(video_cms.upload_views.InitView):
 
     def post(self, request, *args, **kwargs):
