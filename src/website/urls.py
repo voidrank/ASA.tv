@@ -5,6 +5,7 @@ from .upload_ajax import *
 from .collection_ajax import *
 from .user_ajax import *
 from .video_ajax import *
+from .index_ajax import *
 
 urlpatterns_danmaku = patterns(
     '',
@@ -96,4 +97,5 @@ urlpatterns = patterns(
     url(r'collection', include(urlpatterns_collection)),
     url(r'user', include(urlpatterns_user)),
     url(r'video', include(urlpatterns_video)),
+    url(r'index', include(urlpatterns_index)),
 )

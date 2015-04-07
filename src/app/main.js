@@ -83,6 +83,9 @@ define('app', ['angular', 'ngRoute', 'angular-animate'], function(angular, ngRou
   )
   .constant(
     'videoCoverUrl', urlPrefix + '/api/video/cover/'
+  )
+  .constant(
+    'indexUrl', urlPrefix + '/api/index'
   );
   return app;
 });

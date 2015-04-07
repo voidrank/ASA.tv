@@ -1,22 +1,48 @@
 .index{
-  .nav>li{
+  .nav li{
     font-size: 18px;
     font-family: "MicrosoftYaHei";
-    color: rgb( 0, 0, 0 );
+    a {
+      color: #000000;
+    }
     line-height: 3.778;
     z-index: 339;
     cursor: pointer;
     text-align: center;
   }
-  
-  .recommandation>ul>li>img{
-    width: 100;
-    height: 100;
-  }
 
- .slider {
+  .recommandation{
+    background-color: #f7f7f7;
+    height: 650;
+  }
+  
+  .slider {
     border: 2px solid #cfcfcf;
-    height: 304;
+    height: 384;
+    position: relative;
+    padding: 5px;
+    width: 800px;
+    margin: auto;
+    margin-top: 40px;
+
+    .sliding-windows{
+      .sliding-window {
+        opacity: 1;
+        width: 156;
+        height: 95;
+        left: -5;
+        top: -5;
+        z-index: 10;
+        position: relative;
+        border: 1px solid #cfcfcf;
+        text-align: center;
+        padding-top: 20px;
+        strong {
+          color: #101010;
+          font-size: 15px;
+        }
+      }
+    }
     .slide.ng-hide-add, .slide.ng-hide-remove {
       -webkit-transition: all linear 0.5s;
       -moz-transition: all linear 0.5s;
@@ -33,11 +59,6 @@
     .center-grey {
       background: #f2f2f2;
     }
-    position: relative;
-    padding: 5px;
-    width: 610px;
-    margin: auto;
-    margin-top: 40px;
     .slide {
       position: absolute;
       top: 0;
@@ -62,9 +83,62 @@
     .cover {
       position: absolute;
       top: 0;
-      left: 106;
-      height: 300;
-      width: 500;
+      left: 0;
+      height: 380;
+      width: 796;
+      z-index: 0;
+      opacity: 0.7;
     }
+  }
+
+  .recommandation1{
+    top: 40;
+    .title {
+      font-size: 20px;
+      font-family: "MicrosoftYaHei";
+      color: #e94436;
+      line-height: 1.286;
+      text-align: center;
+      margin-top: 20;
+      margin-bottom: 20;
+    }
+    .rcm {
+      border: 1px solid #cfcfcf;
+      height: 83;
+      position: relative;
+      font-size: 14;
+      vertical-align: top;
+      .image{
+        width: 100;
+        margin-right: 0;
+        float: left;
+      }
+      a {
+        .text {
+          vertical-align: top;
+          width: 100;
+          top: 10;
+          left: 10;
+          strong {
+            vertical-align: top;
+            color: #000000;
+          }
+          p {
+            font-size: 10px;
+            color: #787878;
+          }
+        }
+        vertical-align: top;
+        top: 10;
+      }
+      img {
+        height: 70;
+        width: 90;
+        margin-top: 5;
+        margin-left: 5;
+      }
+    }
+    border: 1px solid #cfcfcf;
+    height: 500;
   }
 }

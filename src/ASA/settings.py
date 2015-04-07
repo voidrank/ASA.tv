@@ -48,7 +48,7 @@ INSTALLED_APPS = (
     'guardian',
     'ASA',
     'video_cms',
-    'website'
+    'website',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -126,9 +126,12 @@ LOGGING = {
     }
 }
 
+# prefix
+PREFIX_URL = ''
+
 # media url
-MEDIA_ROOT = 'website/media/'
-MEDIA_URL = 'media/'
+MEDIA_ROOT = PREFIX_URL + 'app/media'
+MEDIA_URL = PREFIX_URL + '/app/media/'
 
 # login redirect
 LOGIN_REDIRECT_URL = '/homepage/'

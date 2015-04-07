@@ -70,3 +70,6 @@ src/website/video_cover
 
 #bower_components
 *bower_components
+
+#static image
+src/app/media/

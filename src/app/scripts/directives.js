@@ -34,32 +34,5 @@ define('directive', ['app', 'jquery'], function(app, $){
                   "<span ng-transclude></span>" +
                   "</a>",
       };
-    })
-    .directive('slider', function(urlPrefix){
-      return {
-        restrict: 'AE',
-        replace: true,
-        templateUrl: urlPrefix + '/app/views/index_slider.html',
-        link: function(scope, ele, attr){
-          scope.currentIndex = 0;
-          console.log(scope.currentIndex);
-          scope.next = function(){
-            console.log(scope.currentIndex);
-            scope.currentIndex < scope.images.length - 1 ? scope.currentIndex++ : scope.currentIndex = 0;
-          };
-          scope.prev = function() {
-            scope.currentIndex > 0 ? scope.currentIndex-- : scope.currentIndex = scope.images.length - 1;
-          };
-          scope.$watch('currentIndex', function(){
-            scope.images.forEach(function(image){
-              image.visible = false;
-            })
-            scope.images[scope.currentIndex].visible = true;
-          });
-        },
-        scope: {
-          images: '='
-        },
-      }
     });
 });

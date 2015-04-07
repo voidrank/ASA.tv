@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(SessionEXT)
 admin.site.register(Collection)
 admin.site.register(FileEXT)
+admin.site.register(Recommandation)

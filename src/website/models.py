@@ -149,3 +149,17 @@ class LoginLog(models.Model):
     user = models.ForeignKey('auth.User')
     login_ip = models.GenericIPAddressField()
     login_time = models.DateTimeField()
+
+
+# index
+class Recommandation(models.Model):
+    id = models.AutoField(primary_key=True)
+    col = models.IntegerField()
+    index = models.IntegerField()
+    img = models.ImageField(upload_to="recommandation")
+    title = models.TextField()
+    description = models.TextField()
+    link = models.URLField()
+
+    def __str__(self):
+        return "Recommandation %s, index %s" % (self.col, self.index)
