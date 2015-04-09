@@ -1,4 +1,5 @@
 .index{
+  height: 2000px;
   .nav li{
     font-size: 18px;
     font-family: "MicrosoftYaHei";
@@ -17,8 +18,8 @@
   }
   
   .slider {
-    border: 2px solid #cfcfcf;
-    height: 384;
+    border: 1px solid #cfcfcf;
+    height: 381;
     position: relative;
     padding: 5px;
     width: 800px;
@@ -27,6 +28,7 @@
 
     .sliding-windows{
       .sliding-window {
+        background-color: #f5f5f5;
         opacity: 1;
         width: 156;
         height: 95;
@@ -37,10 +39,19 @@
         border: 1px solid #cfcfcf;
         text-align: center;
         padding-top: 20px;
+
         strong {
           color: #101010;
           font-size: 15px;
         }
+
+        .description {
+          color: #202020;
+          font-size: 12px;
+        }
+      }
+      .active {
+        background-color: #e74c3c;
       }
     }
     .slide.ng-hide-add, .slide.ng-hide-remove {
@@ -69,6 +80,9 @@
       position: absolute;
       top: 10px;
       right: 20px;
+      a {
+        color: #0f0f0f;
+      }
     }
     .arrows img {
       height: 32px;
@@ -83,11 +97,10 @@
     .cover {
       position: absolute;
       top: 0;
-      left: 0;
-      height: 380;
-      width: 796;
+      left: 155;
+      height: 379;
+      width: 643;
       z-index: 0;
-      opacity: 0.7;
     }
   }
 
@@ -140,5 +153,46 @@
     }
     border: 1px solid #cfcfcf;
     height: 500;
+  }
+
+  .content {
+    top: 200px;
+
+    .collection {
+      height: 240px;
+      .title {
+        height: 30;
+        width: 80;
+        background-color: #e94436;
+        color: #ffffff;
+        text-align: center;
+        font-size: 20px;
+      }
+      .content {
+        width: 800px;
+        height: 200px;
+        border-top: 1px solid #e94436;
+      }
+    }
+
+    .rank-list {
+      border: 1px solid #cfcfcf;
+      height: 1000px;
+      vertical-align: center;
+
+      .title{
+        padding: 10px;
+        height: 50;
+        border-bottom: 1px solid #e74c3c;
+        .word1 {
+          font-size: 20px;
+          color: 1a0000;
+        }
+        .word2 {
+          font-size: 20px;
+          color: e74c3c;
+        }
+      }
+    }
   }
 }

@@ -34,5 +34,23 @@ define('directive', ['app', 'jquery'], function(app, $){
                   "<span ng-transclude></span>" +
                   "</a>",
       };
+    })
+    .directive('contactUs', function(stuUrl){
+      return {
+        restrict: 'E',
+        transclude: true,
+        template: "<a href='" + stuUrl + "'>" +
+                  "<span ng-transclude></span>" +
+                  "</a>",
+      }
+    })
+    .directive('joinUs', function(joinUrl){
+      return {
+        restrict: 'E',
+        transclude: true,
+        template: "<a href='" + joinUrl + "'>" +
+                  "<span ng-transclude></span>" +
+                  "</a>"
+      }
     });
 });

@@ -24,7 +24,9 @@ require.config({
     'factory': 'scripts/factory',
     'directive': 'scripts/directives',
     'headerController': 'scripts/controllers/header',
+    'footerController': 'scripts/controllers/footer',
     'indexController': 'scripts/controllers/index',
+    'homeController': 'scripts/controllers/home',
   },
   shim: {
     'angular': {
@@ -46,19 +48,22 @@ require.config({
 
 define('app', ['angular', 'ngRoute', 'angular-animate'], function(angular, ngRoute){
   var app = angular.module('app', ['ngRoute', 'ngAnimate']);
-  app.config(['$routeProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', "$httpProvider", function($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider){
+  app.config(['$routeProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', "$httpProvider", "$locationProvider", function($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider, $locationProvider){
         app.controllerProvider = $controllerProvider;
         app.compileProvider = $compileProvider;
         app.routeProvider = $routeProvider;
         app.filterProvider = $filterProvider;
         app.provide = $provide;
 
-        $routeProvider.when('/', {
+        $routeProvider
+        .when('/', {
           templateUrl: '/app/views/index.html',
-        });
-        $routeProvider.otherwise({
-          redirectTo: '/'
-        });
+        })
+        .when('/home/', {
+          templateUrl: '/app/views/home.html',
+        })
+
+        $locationProvider.html5Mode(true);
       }])
   .constant(
     'urlPrefix', urlPrefix
@@ -67,7 +72,7 @@ define('app', ['angular', 'ngRoute', 'angular-animate'], function(angular, ngRou
     'apiUrl', urlPrefix + '/api'
   )
   .constant(
-    'homepageUrl', urlPrefix + '/homepage'
+    'homepageUrl', urlPrefix + '/home'
   )
   .constant(
     'loginUrl', urlPrefix + '/accounts/login'
@@ -86,12 +91,18 @@ define('app', ['angular', 'ngRoute', 'angular-animate'], function(angular, ngRou
   )
   .constant(
     'indexUrl', urlPrefix + '/api/index'
+  )
+  .constant(
+    'stuUrl', 'stu.fudan.edu.cn'
+  )
+  .constant(
+    'joinUs', 'stu.fudan.edu.cn/joinus/'
   );
   return app;
 });
 
 define('render', 
-  ['domReady', "angular", 'app', 'jquery', 'indexController', 'headerController', 'directive'], 
+  ['domReady', "angular", 'app', 'jquery', 'indexController', 'headerController', 'footerController', 'homeController', 'directive'], 
   function(domReady, angular, app, $){
     domReady(function(){
 

@@ -2,6 +2,7 @@
   <div class="container-fluid">
     <div class="row">
 
+
       <div class="col-xs-12 navigation">
         <ul class="nav nav-tabs">
           <li role="presentation" class="col-xs-1">
@@ -13,6 +14,7 @@
         </ul>
       </div>
 
+
       <div class="recommandation col-xs-12">
         <!-- recommandation0 -->
         <div class="col-xs-9 recommandation0">
@@ -20,9 +22,10 @@
           <div class="slider">
 
             <div class="sliding-windows">
-              <div class="sliding-window" ng-repeat="image in recommandation[0]">
+              <div class="sliding-window" ng-class="{ 'active': image.visible }" ng-repeat="image in recommandation[0]">
                 <a ng-href="{{ image.link }}">
                   <div><strong>{{ image.title }}</strong></div>
+                  <div class="description">{{ image.description }}</div>
                 </a>
               </div>
             </div>
@@ -34,10 +37,10 @@
             </div>
             <div class="arrows">
               <a href="#/" ng-click="prev()">
-                <img src="img/left-arrow.png" />
+                <div class="glyphicon glyphicon-menu-left"></div>
               </a>
               <a href="#/" ng-click="next()">
-                <img src="img/right-arrow.png" />
+                <div class="glyphicon glyphicon-menu-right"></div>
               </a>
             </div>
           </div>
@@ -60,6 +63,30 @@
             </a>
             <div>
         </div>
+      </div>
+    </div>
+
+
+    <div class="col-xs-12 content">
+
+      <div class="col-xs-9">
+        <div class="col-xs-8 collection" ng-repeat="col in collections">
+          <div class="title"><strong>{{ col.name }}</strong></div>
+          <div class="content">
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-xs-3 rank-list">
+        <div class="title">
+          <span class="word1">
+            <strong>排行榜</strong>
+          </span>
+          <span class="word2">
+            <strong>/RANKING</strong>
+          </span>
+        </div>
+      </div>
 
       </div>
 
