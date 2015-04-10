@@ -61,7 +61,7 @@
                 <p class="description">{{ rcm.description }} </p>
               </span>
             </a>
-            <div>
+          </div>
         </div>
       </div>
     </div>
@@ -72,7 +72,16 @@
       <div class="col-xs-9">
         <div class="col-xs-8 collection" ng-repeat="col in collections">
           <div class="title"><strong>{{ col.name }}</strong></div>
-          <div class="content">
+          <div class="item" ng-repeat="rcm in recommandation[3+$index]">
+			<a ng-href="{{ rcm.link }}">
+			  <div class="image">
+				<img ng-src="{{ rcm.src }}"/>
+			  </div>
+			  <div class="text">
+				<strong class="video-name">{{ rcm.title }}</strong> 
+				<p class="description">{{ rcm.description }} </p>
+			  </div>
+			</a>
           </div>
         </div>
       </div>
@@ -85,6 +94,14 @@
           <span class="word2">
             <strong>/RANKING</strong>
           </span>
+        </div>
+        <div class="item" ng-repeat="rcm in recommandation[2]">
+          <div class="rank">{{ $index+1 }}</div>
+          <div class="text">
+            <div class="video-name">{{ rcm.title }}</div>
+            <div class="description">{{ rcm.description }}</div>
+          </div>
+          <!-- todo: number of played times -->
         </div>
       </div>
 
