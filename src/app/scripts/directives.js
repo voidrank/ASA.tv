@@ -82,7 +82,6 @@ define('directive', ['app', 'jquery'], function(app, $){
 			fileElement.multiple = "multiple";
 		}
 		
-		//element.context.appendChild(fileElement);
 		element.append(fileElement);
 		element.bind("click", function() {
 			fileElement.click();
@@ -92,7 +91,11 @@ define('directive', ['app', 'jquery'], function(app, $){
           if (!ngModel) return;
           ngModel.$render = function() {};
           fileElement.addEventListener("change", function() {
-            ngModel.$setViewValue(fileElement.files);
+            var newValue = [];
+            for (var i=0; i<fileElement.files.length; i++) {
+				newValue.push(fileElement.files[i]);
+			}
+            ngModel.$setViewValue(newValue);
 		  });
         }; // return
       } //link
