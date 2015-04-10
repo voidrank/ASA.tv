@@ -276,7 +276,7 @@ var Uploader;
 * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-var sha256;
+var sha256 = {};
 (function() {
 	/* SHA256 logical functions */
 	function rotateRight(n,x) {
