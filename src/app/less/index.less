@@ -10,6 +10,8 @@
     z-index: 339;
     cursor: pointer;
     text-align: center;
+    vertical-align: center;
+    height: 50px;
   }
 
   .recommandation{
@@ -23,8 +25,6 @@
     position: relative;
     padding: 5px;
     width: 800px;
-    margin: auto;
-    margin-top: 40px;
 
     .sliding-windows{
       .sliding-window {
@@ -40,7 +40,7 @@
         text-align: center;
         padding-top: 20px;
 
-        strong {
+        a {
           color: #101010;
           font-size: 15px;
         }
@@ -52,6 +52,9 @@
       }
       .active {
         background-color: #e74c3c;
+        a, .description {
+          color: #ffffff;
+        }
       }
     }
     .slide.ng-hide-add, .slide.ng-hide-remove {
