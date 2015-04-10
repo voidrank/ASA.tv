@@ -44,7 +44,7 @@ class InitView(video_cms.upload_views.InitView):
                 res_data = json.loads(response.content)
                 session = Session.objects.get(token=res_data['token'])
                 col = Collection.objects.get(name=data['collection'])
-                SessionExt.objects.create(
+                SessionEXT.objects.create(
                     session=session,
                     uploader=request.user,
                     collection=col
