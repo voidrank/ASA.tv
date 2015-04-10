@@ -9,8 +9,7 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
       $scope.tab[tabIndex].isActive = true;
     }
     $scope.changeTab(4);
-    $scope.videoCover = [];
-    uploadVideoCover = new UploadVideoCover(document.getElementById('video-cover'), document.getElementById('video-cover-preview'));
   });
 
+  var uploadVideoCover = new UploadVideoCover(getElementById('video-cover'), document.getElementById('video-cover-preview'));
 });

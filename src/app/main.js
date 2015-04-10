@@ -24,6 +24,7 @@ require.config({
     'factories': 'scripts/factories',
     'directive': 'scripts/directives',
     'Uploader': 'scripts/services/upload/upload',
+    'UploadVideoCover': 'scripts/services/upload/uploadCover',
     'headerController': 'scripts/controllers/header',
     'footerController': 'scripts/controllers/footer',
     'indexController': 'scripts/controllers/index',

@@ -44,7 +44,12 @@
               <div class="video-cover">
                   <span class="word1">*</span>
                   <span class="word2">封面海报:</span>
-                  <input class="video-cover" value="选择图片" type="file"/>
+                  <input ng-model="videoCover" id="video-cover" class="cover" value="选择图片" type="file"/>
+                  <span class="word3">建议大小: 120 * 200</span>
+                  <div class="video-cover-preview">
+                    <img id="video-cover-preview">
+                  </div>
+                  
               </div>
           </div>
 
