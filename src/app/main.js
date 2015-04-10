@@ -23,6 +23,7 @@ require.config({
     /* app */
     'factories': 'scripts/factories',
     'directive': 'scripts/directives',
+    'Uploader': 'scripts/services/upload/upload',
     'headerController': 'scripts/controllers/header',
     'footerController': 'scripts/controllers/footer',
     'indexController': 'scripts/controllers/index',

@@ -1,4 +1,4 @@
-define('homeController', ['app', 'factories', 'less!homeStyle'], function(app){
+define('homeController', ['app', 'factories', 'less!homeStyle', 'Uploader'], function(app){
   app.controller('home', function($scope, $http){
     $scope.tab = [];
     for (var i = 0; i < 6; ++i)
