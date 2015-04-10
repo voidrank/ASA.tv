@@ -134,7 +134,7 @@ MEDIA_ROOT = PREFIX_URL + 'app/media'
 MEDIA_URL = PREFIX_URL + '/app/media/'
 
 # login redirect
-LOGIN_REDIRECT_URL = '/homepage/'
+LOGIN_REDIRECT_URL = '/home/'
 LOGIN_URL = '/accounts/login/'
 
 # django-guardian

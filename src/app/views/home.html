@@ -23,7 +23,7 @@
 
 
           <!-- tab4 uploader -->
-          <div ng-show="tab[4].isActive" class="tab4">
+          <div ng-show="tab[4].isActive" class="tab4" ng-controller="tab4">
               
               <div class="file-list">
                 上传列表
@@ -44,8 +44,16 @@
               <div class="video-cover">
                   <span class="word1">*</span>
                   <span class="word2">封面海报:</span>
-                  <input class="video-cover" value="选择图片" type="file"/>
+                  <input ng-model="videoCover" id="video-cover" class="cover" value="选择图片" type="file"/>
+                  <span class="word3">建议大小: 120 * 200</span>
+                  <div class="video-cover-preview">
+                    <img id="video-cover-preview">
+                  </div>
+                  
               </div>
+          </div>
+
+          <div ng-controller="tab2">
           </div>
 
 
