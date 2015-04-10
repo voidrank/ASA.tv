@@ -491,7 +491,7 @@ var sha256 = {};
 		sha256_init();
 		sha256_update(data, data.length);
 		sha256_final();
-		return sha256_encode_hex();
+		return sha256.sha256_encode_hex();
 	}
 	
 	sha256.sha256_init = sha256_init;
