@@ -1,4 +1,4 @@
-define('footerController', ['app', 'less!/app/less/footer'], function(app){
+define('footerController', ['app', 'less!footerStyle'], function(app){
   'use strict';
   app.controller('footer', ['$scope', '$http', function($scope, $http){
   }]);

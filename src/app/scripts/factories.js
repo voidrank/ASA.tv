@@ -18,4 +18,4 @@ define('factory', ['app'], function(app){
   .config(['$httpProvider', function($httpProvider){
     $httpProvider.interceptors.push('apiUrlHttpInterceptor');
   }]);
-});
+})

@@ -1,86 +1,34 @@
-<div ng-controller="home">
+<div ng-controller="home" class="home">
     <div class="container">
       <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2 options">
               <ul class="nav nav-pills nav-stacked" data-spy="affix">
 
-                <li role="presentation" ng-click="tab_container.change_tab(0)" ng-class="tab_container.tab0.class"><a href="">我的关注</a></li>
-                <li role="presentation" ng-click="tab_container.change_tab(1)" ng-class="tab_container.tab1.class"><a href="">我的投稿组</a></li>
-                <li role="presentation" ng-click="tab_container.change_tab(2)" ng-class="tab_container.tab2.class"><a href="">我的上传</a></li>
-                <li role="presentation" ng-click="tab_container.change_tab(3)" ng-class="tab_container.tab3.class"><a href="">我的收藏</a></li>
-                <li role="presentation" ng-click="tab_container.change_tab(4)" ng-class="tab_container.tab4.class"><a href="">我要上传</a></li>
-                <li role="presentation" ng-click="tab_container.change_tab(5)" ng-class="tab_container.tab5.class"><a href="">个人设置</a></li>
+                <li role="presentation" ng-click="changeTab(0)" ng-class="{ true: 'active', false: 'inactive'}[tab[0].isActive]"><a href="#">我的关注</a></li>
+                <li role="presentation" ng-click="changeTab(1)" ng-class="{ true: 'active', false: 'inactive'}[tab[1].isActive]"><a href="#">我的投稿组</a></li>
+                <li role="presentation" ng-click="changeTab(2)" ng-class="{ true: 'active', false: 'inactive'}[tab[2].isActive]"><a href="#">我的上传</a></li>
+                <li role="presentation" ng-click="changeTab(3)" ng-class="{ true: 'active', false: 'inactive'}[tab[3].isActive]"><a href="#">我的收藏</a></li>
+                <li role="presentation" ng-click="changeTab(4)" ng-class="{ true: 'active', false: 'inactive'}[tab[4].isActive]"><a href="#">我要上传</a></li>
+                <li role="presentation" ng-click="changeTab(5)" ng-class="{ true: 'active', false: 'inactive'}[tab[5].isActive]"><a href="#">个人设置</a></li>
               </ul>
           </div>
 
 
+
         <!-- homepage main area -->
-        <div class="col-md-9">
-          <nav class="navbar navbar-default main-area" role="navigation" id="main-area">
+        <div class="col-xs-9 content">
 
-              <!-- 我的上传 tab2  -->
-              <div class="tab2 main-area" ng-show="tab_container.tab2.active">
-                <div ng-repeat="video in tab2.myupload.content track by $index" class="col-md-3 video" title="{$ video.filename $}">
-                  <a  href="/rec/{$ video.rec $}" class="thumbnail">
-                    <img ng-src="/video_cover/{$ video.rec $}" class="">
-                  </a>
-                  <div class="col-md-2 filename">
-                    <a href="/rec/{$ video.rec $}" >{$ video.filename $}</a>
-                  </div>
-                  <span class="glyphicon glyphicon-play click">
-                    {{ video.click_counts }}
-                  </span>
-                </div>
-              </div>
-              <!--           -->
 
-              <!-- 我要上传 tab4  -->
-              <div ng-show="tab_container.tab4.active" class="tab4 main-area">
+          <!-- tab4 uploader -->
+          <div ng-show="tab[4].isActive" class="col-xs-9 tab4">
+              <span class="glyphicon glyphicon-plus add"> </span>
+          </div>
 
-                <input type="file" id='video-upload' multiple />
-                <div class="add" id="video-upload-icon">
-                  <img src="{{ STATIC_URL }}upload/upload.png" id="video-cover-preview">
-                  <div>添加上传的文件</div>
-                </div>
 
-                <div class="bootstrap-tagsinput files_list col-md-12">
-                  <span ng-repeat="file in tab4.upload.files_list" class="tag label laber-info">
-                    {{ file.name }}
-                    <span class="remove-files" ng-click="tab4.upload.remove_file($index)"></span>
-                  </span>
-                </div>
-
-                <div>
-                  <div class="col-md-2">
-                    <button class="btn btn-primary" ng-click="tab4.upload.start()">开始上传</button>
-                  </div>
-                  <div class="col-md-2">
-                    <button class="btn btn-info" id="video-cover-upload-icon">添加封面</button>
-                    <input type='file' id="video-cover-upload">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="progress">
-                      <div class="progress-bar" ng-style='tab4.upload.progress'>
-                      </div>
-                      <div id="progress-text" >等待上传</div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <button ng-click="test()">
-              <!--           -->
-
-              <!-- 个人资料设置 tab5  -->
-              <div ng-style="setting" ng-show="tab_container.tab5.active">
-                <div id="upload-avatar">
-                </div>
-              </div>
-              <!--                -->
-
-            
-          </nav>
         </div>
+
+
+
 
       </div>
     </div>

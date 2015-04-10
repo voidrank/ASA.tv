@@ -1,6 +1,4 @@
-var Uploader;
-(function(){
-	Uploader = function(file, onStatusChange, config, callback){
+define('Uploader', function(file, onStatusChange, config, callback){
 
 		Object.defineProperty(this, "checksumprog", {
 			get: function() {return checksumprog;}
@@ -168,12 +166,5 @@ var Uploader;
       console.log(m);
       callback(m);
     });
-    /*
-		.catch(function(e){
-			console.log(e);
-			onStatusChange(obj);
-		});
-    */
 	};
-
-})();
+});

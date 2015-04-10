@@ -1,6 +1,6 @@
 define('indexController', 
     [
-     'app','factory', 'less!/app/less/index', 
+     'app','factories', 'less!indexStyle', 
     ],
     function(app){
       app.controller('index', ['$scope','$http', 'collectionUrl', 'indexUrl', 'collectionUrl', function($scope, $http, collectionUrl, indexUrl, collectionUrl){

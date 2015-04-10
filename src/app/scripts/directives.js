@@ -12,7 +12,7 @@ define('directive', ['app', 'jquery'], function(app, $){
       return {
         restrict: 'E',
         transclude: true,
-        template: "<a href='" + loginUrl + "'>" +
+        template: "<a href='" + loginUrl + "' target='_self'>" +
                   "<span ng-transclude></span>" +
                   "</a>",
       };

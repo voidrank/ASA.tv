@@ -29,8 +29,8 @@ class InitView(video_cms.upload_views.InitView):
             data = json.loads(request.body)
             if not ('collection' in data):
                 raise ContentMismatch("Miss collection")
-            if isinstance(data['collection'], list) is False:
-                raise ContentMismatch("Collection must be a list, not a %s" % (type(data),))
+            if isinstance(data['collection'], str) is False:
+                raise ContentMismatch("Collection must be a str, not a %s" % (type(data),))
             if Collection.objects.filter(name=data['collection']).exists() is False:
                 raise NoSuchCollection("Collection '%s' not found" % (data['collection'],))
             if Collection.objects.get(name=data['collection']).abstract is True:

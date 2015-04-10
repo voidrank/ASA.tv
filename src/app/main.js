@@ -21,12 +21,17 @@ require.config({
     /* css */
     'css': 'bower_components/require-css/css.min',
     /* app */
-    'factory': 'scripts/factory',
+    'factories': 'scripts/factories',
     'directive': 'scripts/directives',
     'headerController': 'scripts/controllers/header',
     'footerController': 'scripts/controllers/footer',
     'indexController': 'scripts/controllers/index',
     'homeController': 'scripts/controllers/home',
+    /* style */
+    'indexStyle': 'less/index',
+    'footerStyle': 'less/footer',
+    'homeStyle': 'less/home',
+    'headerStyle': 'less/header',
   },
   shim: {
     'angular': {
@@ -84,7 +89,7 @@ define('app', ['angular', 'ngRoute', 'angular-animate'], function(angular, ngRou
     'registerUrl', urlPrefix + '/accounts/register'
   )
   .constant(
-    'collectionUrl', urlPrefix + '/collection/'
+    'collectionUrl', urlPrefix + '/api/collection/'
   )
   .constant(
     'videoCoverUrl', urlPrefix + '/api/video/cover/'
