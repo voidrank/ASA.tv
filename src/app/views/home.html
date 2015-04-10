@@ -1,5 +1,9 @@
 <div ng-controller="home" class="home">
     <div class="container">
+      <div class='word'>
+        <span class="word1">用户中心</span>
+        <span class="word2">/HOME</span>
+      </div>
       <div class="row">
           <div class="col-md-2 options">
               <ul class="nav nav-pills nav-stacked" data-spy="affix">
@@ -14,14 +18,34 @@
           </div>
 
 
-
         <!-- homepage main area -->
         <div class="col-xs-9 content">
 
 
           <!-- tab4 uploader -->
-          <div ng-show="tab[4].isActive" class="col-xs-9 tab4">
-              <span class="glyphicon glyphicon-plus add"> </span>
+          <div ng-show="tab[4].isActive" class="tab4">
+              
+              <div class="file-list">
+                上传列表
+                <p>
+                <div class="row-info col-xs-12"> 
+                  <div class="col-xs-8 video-name">
+                    视频名 
+                  </div>
+                  <div class="col-xs-4 video-progress">
+                    进度
+                  </div>
+                </div>
+                <div ng-click="" class="glyphicon glyphicon-plus add"> </div>
+              </div>
+              <div>
+              </div>
+
+              <div class="video-cover">
+                  <span class="word1">*</span>
+                  <span class="word2">封面海报:</span>
+                  <input class="video-cover" value="选择图片" type="file"/>
+              </div>
           </div>
 
 

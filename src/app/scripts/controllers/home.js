@@ -8,5 +8,6 @@ define('homeController', ['app', 'factories', 'less!homeStyle'], function(app){
         $scope.tab[i].isActive = false;
       $scope.tab[tabIndex].isActive = true;
     }
+    $scope.changeTab(4);
   });
 });
