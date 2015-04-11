@@ -47,10 +47,12 @@
                     <div ng-show="file.state!=0" class="progress-bar">
                         <div class="bar bar-light"></div>
                         <div class="bar bar-dark"></div>
-                        <div class="bar bar-background"></div>
                     </div>
-                      <div ng-show="file.state==2">上传完成</div>
-                      <div ng-show="file.state==-1">上传失败</div>
+                      <div ng-show="file.state==1">等待上传</div>
+                      <div ng-show="file.state==2">正在计算校验</div>
+                      <div ng-show="file.state==3">正在上传</div>
+                      <div ng-show="file.state==4">上传完成</div>
+                      <div ng-show="file.state==999">上传失败</div>
                   </div>
                 </div>
                 <div ng-change="changeVideoFiles()" ng-model="videofiles" file-upload multiple class="glyphicon glyphicon-plus add"> </div>
