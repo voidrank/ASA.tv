@@ -47,7 +47,6 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
                       function(obj){
                           ngfileobj.progress.checksum = obj.checksumprog;
                           ngfileobj.progress.upload = obj.uploadprog;
-                          $scope.$apply();
                       },
                       {
                           url: apiUrl + '/',
