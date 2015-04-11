@@ -11,6 +11,8 @@ require.config({
     'ngRoute': 'bower_components/angular-route/angular-route.min',
     'angular-resource': 'angular-resource.min',
     'angular-animate': 'bower_components/angular-animate/angular-animate.min',
+    'angular-dropdowns': 'bower_components/angular-dropdowns/dist/angular-dropdowns',
+    'ngDropdownStyle': 'bower_components/angular-dropdowns/dist/angular-dropdowns',
     'bootstrap': 'bower_components/bootstrap/dist/js/bootstrap.min',
     'flat-ui': 'bower_components/flat-ui/dist/js/flat-ui.min',
     'domReady': 'bower_components/domReady/domReady',
@@ -47,14 +49,17 @@ require.config({
     },
     'angular-animate': {
       deps: ['angular']
-    }
+    },
+    'angular-dropdowns': {
+      deps: ['angular']
+    },
   },
   urlArgs: 'v' + (new Date()).getTime()
 });
 
 
-define('app', ['angular', 'ngRoute', 'angular-animate'], function(angular, ngRoute){
-  var app = angular.module('app', ['ngRoute', 'ngAnimate']);
+define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns'], function(angular, ngRoute){
+  var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngDropdowns']);
   app.config(['$routeProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', "$httpProvider", "$locationProvider", function($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider, $locationProvider){
         app.controllerProvider = $controllerProvider;
         app.compileProvider = $compileProvider;

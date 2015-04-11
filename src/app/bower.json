@@ -15,6 +15,7 @@
     "require-css": "~0.1.8",
     "less": "~2.5.0",
     "require-less": "~0.1.5",
-    "requirejs": "~2.1.17"
+    "requirejs": "~2.1.17",
+    "angular-dropdowns": "~1.1.0"
   }
 }
