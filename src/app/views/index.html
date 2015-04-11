@@ -72,16 +72,18 @@
       <div class="col-xs-9">
         <div class="col-xs-8 collection" ng-repeat="col in collections">
           <div class="title"><strong>{{ col.name }}</strong></div>
-          <div class="item" ng-repeat="rcm in recommandation[3+$index]">
-			<a ng-href="{{ rcm.link }}">
-			  <div class="image">
-				<img ng-src="{{ rcm.src }}"/>
-			  </div>
-			  <div class="text">
-				<strong class="video-name">{{ rcm.title }}</strong> 
-				<p class="description">{{ rcm.description }} </p>
-			  </div>
-			</a>
+          <div class="list">
+            <div class="item" ng-repeat="rcm in recommandation[3+$index]">
+             <a ng-href="{{ rcm.link }}">
+                <div class="image">
+                  <img ng-src="{{ rcm.src }}"/>
+                </div>
+                <div class="text">
+                  <strong class="video-name">{{ rcm.title }}</strong> 
+                  <p class="description">{{ rcm.description }} </p>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
