@@ -108,7 +108,7 @@ define('Uploader', [], function(){
       // upload chunk position
       var seqnow = 0;
       // upload chunk count
-      var seqs = parseInt(file.size / config.chunksize);
+      var seqs = parseInt(file.size / config.chunksize) || 1;
 
       // upload chunk size
       var chunksize = config["chunksize"];
@@ -278,6 +278,7 @@ define('Uploader', [], function(){
   */
 
   (function() {
+    "use strict";
     /* SHA256 logical functions */
     function rotateRight(n,x) {
       n = n | 0;
