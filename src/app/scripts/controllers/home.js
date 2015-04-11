@@ -1,4 +1,4 @@
-define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'less!homeStyle'], function(app, Upload, UploadVideoCover){
+define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'less!homeStyle'], function(app, Uploader, UploadVideoCover){
 
   app
 
@@ -21,13 +21,49 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
   })
 
 
-  .controller('tab4', ['$scope', '$http', 'collectionUrl', function($scope, $http, collectionUrl){
-	  
+  .controller('tab4', ['$scope', '$http', 'collectionUrl', 'apiUrl', function($scope, $http, collectionUrl, apiUrl){
+    $scope.videofiles = [];
 	$scope.allvideofiles = [];
     $scope.changeVideoFiles = function() {
-		console.log($scope.videofiles);
 		for (var i=0; i<$scope.videofiles.length; i++) {
-			$scope.allvideofiles.push($scope.videofiles[i]);
+            /* state:
+                  0: set up
+                  1: uploading
+                  2: uploaded
+                  -1: failed
+             */
+			$scope.allvideofiles.push({
+              file: $scope.videofiles[i],
+              name: $scope.videofiles[i].name,
+              state: 0,
+                progress: {
+                    checksum: 0,
+                    upload: 0
+                },
+              upload: function() {
+                  var ngfileobj = this;
+                  ngfileobj.state = 1;
+                  var uploadinst = new Uploader(ngfileobj.file,
+                      function(obj){
+                          ngfileobj.progress.checksum = obj.checksumprog;
+                          ngfileobj.progress.upload = obj.uploadprog;
+                          $scope.$apply();
+                      },
+                      {
+                          url: apiUrl + '/',
+                          filename: ngfileobj.name
+                      },
+                      function(){
+                          ngfileobj.state = 2;
+                          $scope.$apply();
+                      },
+                      function(err){
+                          console.log(err);
+                          ngfileobj.state = -1;
+                          $scope.$apply();
+                      });
+              }
+            });
 		}
 		console.log($scope.allvideofiles);
 	};
