@@ -38,7 +38,15 @@
                     进度
                   </div>
                 </div>
-                <div ng-click="" class="glyphicon glyphicon-plus add"> </div>
+                <div class="row-info col-xs-12" ng-repeat="file in allvideofiles"> 
+                  <div class="col-xs-8 video-name">
+                    {{ file.name }}
+                  </div>
+                  <div class="col-xs-4 video-progress">
+                    ...
+                  </div>
+                </div>
+                <div ng-change="changeVideoFiles()" ng-model="videofiles" file-upload multiple class="glyphicon glyphicon-plus add"> </div>
               </div>
               <div>
               </div>

@@ -13,6 +13,7 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
       $scope.tab[tabIndex].isActive = true;
     }
     $scope.changeTab(4);
+    
   })
   
 
@@ -21,6 +22,16 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
 
 
   .controller('tab4', ['$scope', '$http', 'collectionUrl', function($scope, $http, collectionUrl){
+	  
+	$scope.allvideofiles = [];
+    $scope.changeVideoFiles = function() {
+		console.log($scope.videofiles);
+		for (var i=0; i<$scope.videofiles.length; i++) {
+			$scope.allvideofiles.push($scope.videofiles[i]);
+		}
+		console.log($scope.allvideofiles);
+	};
+	  
     $scope.videoCover = [];
     uploadVideoCover = new UploadVideoCover(document.getElementById('video-cover'), document.getElementById('video-cover-preview'));
     $http.get(collectionUrl + 'is_member_of')
