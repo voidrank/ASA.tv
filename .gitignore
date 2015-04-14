@@ -73,3 +73,6 @@ src/website/video_cover
 
 #static image
 src/app/media/
+
+# webstorm
+src/app/.idea
