@@ -45,8 +45,8 @@
                   <div class="col-xs-4 video-progress">
                     <div ng-show="file.state==0" ng-click="file.upload()">开始上传</div>
                     <div ng-show="file.state!=0" class="progress-bar">
-                        <div class="bar bar-light" ng-style="{ 'width':this.progress.upload+'%'; }"></div>
-                        <div class="bar bar-dark" ng-style="{ 'width':this.progress.upload+'%'; }"></div>
+                        <div class="bar bar-light" ng-style="{ 'width':file.progress.upload+'%' }"></div>
+                        <div class="bar bar-dark" ng-style="{ 'width':file.progress.checksum+'%' }"></div>
                     </div>
                       <div ng-show="file.state==1">等待上传</div>
                       <div ng-show="file.state==2">正在计算校验</div>
