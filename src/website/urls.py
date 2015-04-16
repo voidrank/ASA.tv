@@ -87,15 +87,16 @@ urlpatterns_homepage = patterns(
 
 urlpatterns = patterns(
     r'',
-    url(r'', include(urlpatterns_perinfo)),
-    url(r'', include(urlpatterns_register)),
-    url(r'', include(urlpatterns_homepage)),
-    url(r'', include(urlpatterns_upload)),
-    url(r'', include(urlpatterns_danmaku)),
-    url(r'', include(urlpatterns_video_list)),
-    url(r'', include(urlpatterns_video_cover)),
-    url(r'collection', include(urlpatterns_collection)),
-    url(r'user', include(urlpatterns_user)),
-    url(r'video', include(urlpatterns_video)),
-    url(r'index', include(urlpatterns_index)),
+    url(r'api', include(urlpatterns_perinfo)),
+    url(r'api', include(urlpatterns_register)),
+    url(r'api', include(urlpatterns_homepage)),
+    url(r'api', include(urlpatterns_upload)),
+    url(r'api', include(urlpatterns_danmaku)),
+    url(r'api', include(urlpatterns_video_list)),
+    url(r'api', include(urlpatterns_video_cover)),
+    url(r'api/collection', include(urlpatterns_collection)),
+    url(r'api/user', include(urlpatterns_user)),
+    url(r'api/video', include(urlpatterns_video)),
+    url(r'api/index', include(urlpatterns_index)),
+    url(r'rec/(?P<rec>[0-9]*/?)', MediaView.as_view())
 )

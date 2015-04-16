@@ -18,6 +18,6 @@ urlpatterns = patterns(
         {'template_name': 'logged_out.html'}),
     url(r'^$', 'ASA.views.app'),
     url(r'^home/$', 'ASA.views.app'),
-    url(r'api/', include('website.urls')),
-) + \
-    static('/app/', document_root='app')
+    url(r'', include('website.urls')),
+    url(r'', include('video_cms.urls')),
+) + static('/app/', document_root='app') + static('/static/', document_root='static')

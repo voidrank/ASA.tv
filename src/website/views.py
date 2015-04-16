@@ -4,7 +4,7 @@ except Exception:
     import json
 from .models import *
 
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.views.generic import View
 from django.contrib.auth.models import User, UserManager
@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from video_cms.settings import MIN_CHUNK_SIZE
-import video_cms
+from video_cms.models import *
 
 
 def indexpage(request):
@@ -59,7 +59,16 @@ def homepage(request):
     return render(request, 'homepage.html')
 
 
-class PageView(video_cms.upload_views.PageView):
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(PageView, self).dispatch(*args, **kwargs)
+class MediaView(View):
+    @staticmethod
+    def get(request, rec, *args, **kwargs):
+        assert rec is not None
+        try:
+            rec = int(rec)
+            token = File.get_token_by_rec(rec)
+        except:
+            token = File.get_token_by_name(rec)
+        return render_to_response(
+            "media.html",
+            {"token": token}
+        )

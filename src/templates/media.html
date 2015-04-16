@@ -8,22 +8,16 @@
 		<script src="/static/ABPlayerHTML5/js/ABPMobile.js"></script>
 		<script src="/static/ABPlayerHTML5/js/CommentCoreLibrary.min.js"></script>
 		<script src="/static/ABPlayerHTML5/js/ABPLibxml.js"></script>
-		<script src="/static/ABPlayerHTML5/js/ABPRestyle.js"></script>
 		<script src="/static/ABPlayerHTML5/js/ABPlayer.js"></script>
-        <script src="/static/jquery/js/jquery.min.js"></script>
-        <script> 
-			var socketio = document.createElement('script');
-			socketio.onload=function(){
-				render_player("{{token}}");
-            };
-			socketio.setAttribute("src","http:\/\/" + window.location.hostname + ":4000/socket.io/socket.io.js");
-			document.getElementsByTagName("head")[0].appendChild(socketio);
-		</script>
-        <script src="/static/player/player.js"></script>
+    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/player/player.js"></script>
 	</head>
 	<body>
 		<div id="player">
 		</div>
 		<div id="toBeInjected"></div>
 	</body>
+    <script> 
+      render_player("{{token}}");
+    </script>
 </html>
