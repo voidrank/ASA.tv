@@ -1,3 +1,11 @@
-1.把video_cms的ajax部分写成decorator
+1. 统一前后端url，以url驱动开发。
+        前端以angular的.constant表明url的功能
+        后台以(url, functionStr)的形式绑定ajax函数和url
 
-2.把权限系统写成decorator
+2. 改用jquery的upload进行断点上传, 后台用celery搞一个finalize文件合并的事件(防阻塞)
+
+3. 播放页面完整
+
+4. 首页推荐，分版推荐机制完善
+
+待商榷 5. 后台转移到tornado上
