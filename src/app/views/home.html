@@ -21,7 +21,20 @@
         <!-- homepage main area -->
         <div class="col-xs-9 content">
 
-          <div ng-controller="tab2">
+          <div ng-controller="tab2" class="tab2" ng-show="tab[2].isActive">
+            <a class='item' ng-repeat="item in myUpload" ng-href="{{ playerUrl }}{{ item.rec }}" target="_self">
+              <div class='cover' style="background-image: url('{{ videoCoverUrl }}{{ item.rec }}')">
+              </div>
+              <div class='title'>
+                {{ item.filename }}
+              </div>
+              <div class='playCount'>
+                点击次数:{{ item.play_count }}
+              </div>
+              <div class="collection">
+                分类: {{ item.col }}
+              </div>
+            </a>
           </div>
 
           <!-- tab4 uploader -->
@@ -66,7 +79,7 @@
                   <input ng-model="videoCover" id="video-cover" class="cover" value="选择图片" type="file"/>
                   <span class="word3">建议大小: 120 * 200</span>
                   <div class="video-cover-preview">
-                    <img id="video-cover-preview">
+                    <div id="video-cover-preview"></div>
                   </div>
               </div>
               <div class="other-info">

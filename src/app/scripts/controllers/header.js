@@ -1,6 +1,8 @@
 define('headerController', ['app', 'less!headerStyle'], function(app){
   'use strict';
-  app.controller('header', ['$scope', '$http', 'urlPrefix', function($scope, $http, urlPrefix){
+  app.controller('header', ['$scope', '$http', 'urlPrefix', 'indexPageUrl', 'github', function($scope, $http, urlPrefix, indexPageUrl, github){
+    $scope.indexPageUrl = indexPageUrl;
+    $scope.github = github;
     $scope.userLogIO = {
       'authenticated': false,
       'username' : ''

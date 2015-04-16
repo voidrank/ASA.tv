@@ -6,6 +6,7 @@ from .collection_ajax import *
 from .user_ajax import *
 from .video_ajax import *
 from .index_ajax import *
+from .danmaku_ajax import *
 
 urlpatterns_danmaku = patterns(
     '',
@@ -25,16 +26,6 @@ urlpatterns_video_list = patterns(
         name='video_list'
     )
 )
-
-urlpatterns_video_cover = patterns(
-    '',
-    url(
-        r'^video_cover/(?P<rec>[0-9]+)/$',
-        VideoCoverView.as_view(),
-        name='video_cover'
-    )
-)
-
 
 urlpatterns_perinfo = patterns(
     r'',
@@ -90,13 +81,12 @@ urlpatterns = patterns(
     url(r'api', include(urlpatterns_perinfo)),
     url(r'api', include(urlpatterns_register)),
     url(r'api', include(urlpatterns_homepage)),
-    url(r'api', include(urlpatterns_upload)),
+    url(r'', include(urlpatterns_upload)),
     url(r'api', include(urlpatterns_danmaku)),
     url(r'api', include(urlpatterns_video_list)),
-    url(r'api', include(urlpatterns_video_cover)),
     url(r'api/collection', include(urlpatterns_collection)),
     url(r'api/user', include(urlpatterns_user)),
-    url(r'api/video', include(urlpatterns_video)),
+    url(r'', include(urlpatterns_video)),
     url(r'api/index', include(urlpatterns_index)),
     url(r'rec/(?P<rec>[0-9]*/?)', MediaView.as_view())
 )

@@ -1,3 +1,7 @@
+@border-color: #cfcfcf;
+@black: #000000;
+@white: #ffffff;
+@gray: #787878;
 .index{
   a {
     text-decoration: none;
@@ -44,6 +48,7 @@
         padding-top: 20px;
 
         a {
+          background-size: cover;
           color: #101010;
           font-size: 15px;
         }
@@ -101,6 +106,7 @@
       color: #222;
     }
     .cover {
+      background-size: cover;
       position: absolute;
       top: 0;
       left: 155;
@@ -150,7 +156,8 @@
         vertical-align: top;
         top: 10;
       }
-      img {
+      .cover {
+        background-size: cover;
         height: 70;
         width: 90;
         margin-top: 5;
@@ -189,13 +196,14 @@
             height: 150px;
             overflow: hidden;
             border: 1px solid #cfcfcf;
-            img {
+            .cover {
               width: inherit;
               height: inherit;
+              background-size: cover;
             }
           }
           .text {
-            background-color: #cfcfcf;
+            background-color: #ededed;
             * {
               display: block;
               overflow: hidden;
@@ -207,13 +215,14 @@
     }
 
     .rank-list {
-      border: 1px solid #cfcfcf;
+      border: 1px solid @border-color;
       height: 1000px;
       vertical-align: center;
 
       .title{
         padding: 10px;
         height: 50;
+        margin-bottom: 10px;
         border-bottom: 1px solid #e74c3c;
         .word1 {
           font-size: 20px;
@@ -222,6 +231,35 @@
         .word2 {
           font-size: 20px;
           color: e74c3c;
+        }
+      }
+      .item {
+        height: 75px;
+        padding-top: 10px;
+        display: block;
+        border-bottom: 1px solid @border-color;
+        .rank {
+          height: 30px;
+          width: 30px;
+          float: left;
+          font-size: 20px;
+          font-weight: bold;
+          margin-left: 10px;
+          background-color: @gray;
+          color: @white;
+          padding-left: 10px;
+        }
+        .text {
+          float: left;
+          margin-left: 15px;
+          .video-name {
+            font-weight: bold;
+            font-size: 16px;
+            color: @black;
+          }
+          .description {
+            color: gray;
+          }
         }
       }
     }

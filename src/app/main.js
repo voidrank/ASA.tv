@@ -105,6 +105,18 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns'], fu
     'indexUrl', urlPrefix + '/api/index'
   )
   .constant(
+    'playerUrl', urlPrefix + '/rec/'
+  )
+  .constant(
+    'indexPageUrl', urlPrefix + '/'
+  )
+  .constant(
+    'myUploadUrl', urlPrefix + '/api/video/myupload'
+  )
+  .constant(
+    'github', 'http://github.com/voidrank/asa.tv'
+  )
+  .constant(
     'stuUrl', 'stu.fudan.edu.cn'
   )
   .constant(

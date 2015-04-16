@@ -5,8 +5,12 @@
 define('UploadVideoCover', [], function(){
   var UploadVideoCover;
   (function(){
-    UploadVideoCover = function(input, videoCoverPreview){
-
+    UploadVideoCover = function(input, videoCoverPreview, config){
+      /*
+       *  config = {
+       *    'url': '/api/video_cover/$rec', //upload url
+       *  }
+       */
       input.onchange = function(){
         if (input.files.length > 0){
           var reader = new FileReader();
@@ -14,9 +18,6 @@ define('UploadVideoCover', [], function(){
             videoCoverPreview.setAttribute('src', event.target.result);
           }
           reader.readAsDataURL(input.files[0]);
-        }
-        else {
-          videoCoverPreview.setAttribute('src', '/static/upload/upload.png');
         }
       }
 
@@ -38,7 +39,7 @@ define('UploadVideoCover', [], function(){
         reader.onload = function(e){
           data = e.target.result;
           var xhr = new XMLHttpRequest();
-          xhr.open("POST", "/video_cover/"+rec+"/", true);
+          xhr.open("POST", config.url + rec, true);
           xhr.onreadystatechange = function(){
             if (xhr.readyState == 4){
               if (xhr.status == 200)

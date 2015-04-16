@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 
 import video_cms.models
 
@@ -48,11 +48,13 @@ class FileEXT(models.Model):
     uploader = models.ForeignKey('auth.User')
     collection = models.ForeignKey('Collection')
     onshow = models.BooleanField(default=False)
+    play_count = models.PositiveIntegerField(default=0)
 
 
 class Danmaku(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey('auth.user')
     owner = models.ForeignKey('video_cms.File', db_index=True, on_delete=models.PROTECT)
     mode = models.IntegerField()
     stime = models.IntegerField()
@@ -63,12 +65,14 @@ class Danmaku(models.Model):
 
     @staticmethod
     def new(owner=None,
+            user=None,
             date=None,
             mode=1,
             stime=0,
             text="",
             size=30,
             color=0xffffff):
+        assert isinstance(user, User) is True
         assert isinstance(owner, str) is True
         assert isinstance(mode, int) is True
         assert isinstance(stime, int) is True
@@ -80,6 +84,7 @@ class Danmaku(models.Model):
         owner = video_cms.models.File.objects.get(token=owner)
         Danmaku.objects.create(
             owner=owner,
+            user=user,
             mode=mode,
             stime=stime,
             text=text,
@@ -156,10 +161,11 @@ class Recommandation(models.Model):
     id = models.AutoField(primary_key=True)
     col = models.IntegerField()
     index = models.IntegerField()
+    rec = models.IntegerField(null=True, blank=True)
     img = models.ImageField(upload_to="recommandation")
     title = models.TextField()
-    description = models.TextField()
-    link = models.URLField()
+    description = models.TextField(null=True, blank=True)
+    link = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return "Recommandation %s, index %s" % (self.col, self.index)

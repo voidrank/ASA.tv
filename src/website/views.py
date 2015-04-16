@@ -9,7 +9,6 @@ from django.http import HttpResponse
 from django.views.generic import View
 from django.contrib.auth.models import User, UserManager
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 
 from video_cms.settings import MIN_CHUNK_SIZE
 from video_cms.models import *
@@ -65,10 +64,13 @@ class MediaView(View):
         assert rec is not None
         try:
             rec = int(rec)
-            token = File.get_token_by_rec(rec)
+            file_ = File.objects.get(rec=rec)
         except:
-            token = File.get_token_by_name(rec)
+            file_ = File.objects.get(rec=rec)
+        ext = file_.ext
+        ext.play_count = ext.play_count + 1
+        ext.save()
         return render_to_response(
             "media.html",
-            {"token": token}
+            {"token": file_.token}
         )

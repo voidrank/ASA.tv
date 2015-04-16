@@ -18,8 +18,8 @@ from video_cms.exceptions import *
 
 from .exceptions import *
 from .models import *
-from .settings import (VIDEO_COVER_DIR,
-                       AVATAR_ROOT, AVATAR_SIZE_LIMIT)
+
+from .settings import AVATAR_ROOT, AVATAR_SIZE_LIMIT
 
 
 class InitView(video_cms.upload_views.InitView):
@@ -178,74 +178,6 @@ class SessionsView(View):
         return super(SessionsView, self).dispatch(*args, **kwargs)
 
 
-class DanmakuView(View):
-    @staticmethod
-    def get(request, token):
-        danmaku_list = Danmaku.load_danmaku_by_video_token(token)
-        return HttpResponse(json.dumps(danmaku_list))
-
-    @staticmethod
-    def post(request, token):
-        try:
-            data = request.POST
-            assert isinstance(data, dict)
-        except (ValueError, AssertionError):
-            return HttpResponseBadRequest(
-                {'errstr': 'invalid json format'},
-                content_type='application/json'
-            )
-
-        assert 'mode' in data
-        assert 'stime' in data
-        assert 'text' in data
-        assert 'color' in data
-        assert 'size' in data
-        assert 'date' in data
-        Danmaku.new(
-            owner=token,
-            date=int(data['date']),
-            mode=int(data['mode']),
-            stime=int(data['stime']),
-            text=data['text'],
-            color=data['color'],
-            size=int(data['size'])
-        )
-        return HttpResponse(json.dumps({'status': 'OK'}))
-
-
-class VideoCoverView(View):
-
-    def get(self, request, rec, *args, **kwargs):
-        try:
-            f = open(os.path.join(VIDEO_COVER_DIR, rec), "rb")
-        except Exception:
-            f = open(os.path.join(VIDEO_COVER_DIR, 'default'), "rb")
-        return HttpResponse(f.read(), content_type='image')
-
-    def post(self, request, rec, *args, **kwargs):
-        try:
-            video = File.objects.get(rec=int(rec))
-        except Exception:
-            return HttpResponse(json.dumps({
-                'status': 'error',
-                'reason': 'video file does not exists'
-            }))
-        if video.ext.uploader == request.user:
-            with open(os.path.join(VIDEO_COVER_DIR, rec), "wb") as f:
-                f.write(request.body)
-            return HttpResponse(json.dumps({
-                'status': 'OK'
-            }))
-        else:
-            return HttpResponse(json.dumps({
-                'status': 'error',
-                'reason': 'Permission Denied: you are not the uploader'
-            }))
-
-    def dispatch(self, *args, **kwargs):
-        return super(VideoCoverView, self).dispatch(*args, **kwargs)
-
-
 @login_required
 def GenericPerInfo(request):
     return HttpResponse(json.dumps({
@@ -260,26 +192,6 @@ def AdvacedPerInfo(request):
     return HttpResponse(json.dumps({
         'chunksize': info.default_chunksize,
     }))
-
-
-@login_required
-def myupload(request):
-    assert 'op' in request.GET
-    assert 'ct' in request.GET
-    op = int(request.GET['op'])
-    ct = int(request.GET['ct'])
-    if ct > 20:
-        ct = 20
-    return HttpResponse(json.dumps(list(map(
-        lambda video: {
-            'rec': video.base.rec,
-            'filename': video.base.filename,
-            'click_counts': 0
-        },
-        FileEXT.objects.filter(uploader=request.user).order_by('base__rec')[op: op + ct]
-    ))))
-
-
 @login_required
 def mygroup(request):
     return HttpResponse(json.dumps(
@@ -355,31 +267,31 @@ class AvatarView(View):
 urlpatterns_upload = patterns(
     r'',
     url(
-        r'^upload/init/?',
+        r'api/upload/init/?',
         InitView.as_view(),
         name='init'
     ),
 
     url(
-        r'^upload/chunk/(?P<owner>[a-fA-F0-9]{64})/?',
+        r'api/upload/chunk/(?P<owner>[a-fA-F0-9]{64})/?',
         ChunkView.as_view(),
         name='chunk'
     ),
 
     url(
-        r'^upload/store/(?P<owner>[a-fA-F0-9]{64})/?',
+        r'api/upload/store/(?P<owner>[a-fA-F0-9]{64})/?',
         FinalizeView.as_view(),
         name='store'
     ),
 
     url(
-        r'^upload/destroy/(?P<owner>[a-fA-F0-9]{64}/?)',
+        r'api/upload/destroy/(?P<owner>[a-fA-F0-9]{64}/?)',
         DestroyView.as_view(),
         name='destroy'
     ),
 
     url(
-        r'^upload/session/$',
+        r'api/upload/session/$',
         SessionsView.as_view(),
         name='sessions'
     )

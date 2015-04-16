@@ -1,3 +1,6 @@
+@black: #000000;
+@gray: #cfcfcf;
+
 .home {
   .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
       color: #fff;
@@ -11,7 +14,7 @@
 
   .container {
     margin-top: 50px;
-    height: 1000px;
+    height: 1200px;
     background-color: #fcfcfc;
   }
 
@@ -31,9 +34,43 @@
   .content {
     background-color: #ffffff;
     border: 1px solid #cfcfcf;
-    height: 800px;
+    height: 1000px;
     padding-left: 0px;
     padding-right: 0px;
+
+    .tab2 {
+      padding-left: 20px;
+      .item {
+        margin-top: 20px;
+        display: block;
+        height: 270px;
+        width: 122px;
+        float: left;
+        margin-left: 5px;
+        border: 1px solid @gray;
+        .cover {
+          height: 200px;
+          width: 120px;
+          background-size: cover;
+        }
+        .title {
+          margin-top: 2px;
+          font-size: 16px;
+          color: @black;
+          font-weight: bold;
+          width: 120px;
+          margin-left: 5px;
+        }
+        .playCount {
+          color: @gray;
+          margin-left: 5px;
+        }
+        .collection {
+          color: @gray;
+          margin-left: 5px;
+        }
+      }
+    }
     
     .tab4 {
       font-size: 20px;

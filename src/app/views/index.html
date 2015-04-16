@@ -23,7 +23,7 @@
 
             <div class="sliding-windows">
               <div class="sliding-window" ng-class="{ 'active': image.visible }" ng-repeat="image in recommandation[0]">
-                <a ng-href="{{ image.link }}">
+                <a ng-href="{{ image.link }}" target='_self'>
                   <div><strong>{{ image.title }}</strong></div>
                   <div class="description">{{ image.description }}</div>
                 </a>
@@ -31,8 +31,8 @@
             </div>
 
             <div class="slide" ng-repeat="image in recommandation[0]" ng-show="image.visible">
-              <a ng-href="{{ image.link }}">
-                <img ng-src="{{ image.src }}" class="cover"/>
+              <a ng-href="{{ image.link }}" target='_self'>
+                <div style=" background-image: url('{{image.src}}') " class="cover"></div>
               </a>
             </div>
             <div class="arrows">
@@ -52,9 +52,9 @@
             <strong> 推荐/Recommandation </strong>
           </div>
           <div ng-repeat="rcm in recommandation[1]" class="rcm">
-            <a ng-href="{{ rcm.link }}">
+            <a ng-href="{{ rcm.link }}" href='_self'>
               <span class="image">
-                <img ng-src="{{ rcm.src }}"/>
+                <div style="background-image: url({{ rcm.src }})" class="cover"></div>
               </span>
               <span class="text">
                 <strong class="video-name">{{ rcm.title }}</strong> 
@@ -74,9 +74,9 @@
           <div class="title"><strong>{{ col.name }}</strong></div>
           <div class="list">
             <div class="item" ng-repeat="rcm in recommandation[3+$index]">
-             <a ng-href="{{ rcm.link }}">
+             <a ng-href="{{ rcm.link }}" target='_self'>
                 <div class="image">
-                  <img ng-src="{{ rcm.src }}"/>
+                  <div class="cover" style="background-image: url({{rcm.src}})"></div>
                 </div>
                 <div class="text">
                   <strong class="video-name">{{ rcm.title }}</strong> 
@@ -97,14 +97,13 @@
             <strong>/RANKING</strong>
           </span>
         </div>
-        <div class="item" ng-repeat="rcm in recommandation[2]">
+        <a class="item" ng-repeat="rcm in rankList" ng-href="{{ playerUrl }}{{ rcm.rec }}" target="_self">
           <div class="rank">{{ $index+1 }}</div>
           <div class="text">
-            <div class="video-name">{{ rcm.title }}</div>
-            <div class="description">{{ rcm.description }}</div>
+            <div class="video-name">{{ rcm.filename }}</div>
           </div>
           <!-- todo: number of played times -->
-        </div>
+        </a>
       </div>
 
       </div>
