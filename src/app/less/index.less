@@ -2,66 +2,83 @@
 @black: #000000;
 @white: #ffffff;
 @gray: #787878;
+
 .index{
+  .row.navigation {
+    border-bottom: 1px solid #DDD;
+  }
+  .nav-tabs {
+    border-bottom: none;
+  }
+
   a {
     text-decoration: none;
   }
-  height: 2000px;
+
   .nav li{
+    height: 50px;
     font-size: 18px;
-    font-family: "MicrosoftYaHei";
-    a {
-      color: #000000;
-    }
-    line-height: 3.778;
-    z-index: 339;
     cursor: pointer;
     text-align: center;
-    vertical-align: center;
-    height: 50px;
+
+    a {
+      color: #000000;
+      padding: 0;
+      line-height: 50px;
+    }
   }
 
   .recommandation{
-    background-color: #f7f7f7;
-    height: 650;
+    background-color: #F7F7F7;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
   
   .slider {
-    border: 1px solid #cfcfcf;
-    height: 381;
-    position: relative;
-    padding: 5px;
-    width: 800px;
+    box-shadow: 0 0 0 1px #cfcfcf;
+    height: 280px;
 
     .sliding-windows{
       .sliding-window {
-        background-color: #f5f5f5;
         opacity: 1;
-        width: 156;
-        height: 95;
-        left: -5;
-        top: -5;
-        z-index: 10;
-        position: relative;
-        border: 1px solid #cfcfcf;
         text-align: center;
-        padding-top: 20px;
+        height: 56px;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+        background-color: #F2F2F2;
 
-        a {
-          background-size: cover;
-          color: #101010;
+        span {
+          display: inline-block;
+          line-height: 1.5em;
+        }
+
+        .sliding-title {
           font-size: 15px;
+          margin-top: 10px;
+          font-weight: 600;
         }
 
         .description {
-          color: #202020;
           font-size: 12px;
         }
+
+        a {
+          color: #313131;
+          font-size: 15px;
+          width: 100%;
+          height: 100%;
+          display: block;
+          line-height: 1em;
+        }
+
       }
       .active {
         background-color: #e74c3c;
-        a, .description {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3) inset, 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+        a {
           color: #ffffff;
+          text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+          .sliding-title {
+            font-weight: 400;
+          }
         }
       }
     }
@@ -107,159 +124,213 @@
     }
     .cover {
       background-size: cover;
-      position: absolute;
-      top: 0;
-      left: 155;
-      height: 379;
-      width: 643;
+      height: 100%;
+      width: 100%;
       z-index: 0;
     }
   }
 
-  .recommandation1{
-    top: 40;
-    .title {
-      font-size: 20px;
-      font-family: "MicrosoftYaHei";
-      color: #e94436;
-      line-height: 1.286;
-      text-align: center;
-      margin-top: 20;
-      margin-bottom: 20;
+  .recommandation0, .recommandation1 {
+    > div {
+      box-shadow: 0 1px 10px 0px rgba(0, 0, 0, 0.3), 0 0 0 1px #CFCFCF;
+      margin-bottom: 30px;
     }
+  }
+
+  .recommandation1{
+
+    .recommandation1-container {
+      height: 280px;
+    }
+
+    .title {
+      font-size: 18px;
+      color: #e94436;
+      text-align: left;
+      margin: 0;
+      height: 40px;
+      line-height: 40px;
+      text-transform: uppercase;
+
+      .color-black {
+        color: #0f0f0f;
+      }
+
+      hr {
+        margin: -1px 0;
+        width: 90%;
+        border-top: 2px solid #E94436;
+      }
+    }
+
     .rcm {
-      border: 1px solid #cfcfcf;
-      height: 83;
-      position: relative;
+
+      border-bottom: 2px dashed #CFCFCF;
+      padding-top: 11px;
+      height: 80px;
       font-size: 14;
-      vertical-align: top;
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
       .image{
         width: 100;
-        margin-right: 0;
+        margin-right: 8px;
         float: left;
       }
       a {
         .text {
-          vertical-align: top;
-          width: 100;
-          top: 10;
-          left: 10;
+
           strong {
             vertical-align: top;
             color: #000000;
           }
           p {
-            font-size: 10px;
+            font-size: 12px;
             color: #787878;
           }
         }
-        vertical-align: top;
-        top: 10;
+
       }
       .cover {
         background-size: cover;
-        height: 70;
-        width: 90;
-        margin-top: 5;
-        margin-left: 5;
+        height: 56px;
+        width: 100px;
       }
     }
-    border: 1px solid #cfcfcf;
-    height: 500;
   }
+}
 
-  .content {
-    top: 200px;
+.container .content {
 
-    .collection {
-      height: 240px;
-      width: 800px;
-      .title {
-        height: 30;
-        width: 80px;
-        background-color: #e94436;
+  .collection {
+    margin-top: 40px;
+
+    .title {
+      height: 32px;
+      margin-bottom: 10px;
+      text-align: left;
+      font-size: 20px;
+      color: #E94436;
+      text-transform: uppercase;
+      border-bottom: 2px solid #e94436;
+
+      strong {
+        padding: 8px;
         color: #ffffff;
-        text-align: center;
-        font-size: 20px;
+        background-color: #e94436;
       }
-      .list {
-        width: 800px;
-        height: 210px;
-        border-top: 2px solid #e94436;
-        .item {
-          height: 190px;
-          width: 150px;
-          float: left;
-          margin: 5px 10px 0 0;
-          a .image {
-            width: 100%;
-            height: 150px;
-            overflow: hidden;
-            border: 1px solid #cfcfcf;
-            .cover {
-              width: inherit;
-              height: inherit;
-              background-size: cover;
-            }
-          }
-          .text {
-            background-color: #ededed;
-            * {
-              display: block;
-              overflow: hidden;
-              color: #000;
-            }
-          }
-        }
-      }
+
     }
 
-    .rank-list {
-      border: 1px solid @border-color;
-      height: 1000px;
-      vertical-align: center;
+    .list {
+      margin-left: -5px;
+      margin-right: -5px;
 
-      .title{
-        padding: 10px;
-        height: 50;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #e74c3c;
-        .word1 {
-          font-size: 20px;
-          color: 1a0000;
-        }
-        .word2 {
-          font-size: 20px;
-          color: e74c3c;
-        }
-      }
       .item {
-        height: 75px;
-        padding-top: 10px;
-        display: block;
-        border-bottom: 1px solid @border-color;
-        .rank {
-          height: 30px;
-          width: 30px;
-          float: left;
-          font-size: 20px;
-          font-weight: bold;
-          margin-left: 10px;
-          background-color: @gray;
-          color: @white;
-          padding-left: 10px;
+
+        padding-left: 5px;
+        padding-right: 5px;
+
+        @media (min-width: 769px) {
+          &.col-sm-2_4 {
+            width: 20%;
+          }
+        }
+
+        a .image {
+          width: 100%;
+          height: 150px;
+          overflow: hidden;
+          border: 1px solid #cfcfcf;
+          .cover {
+            width: inherit;
+            height: inherit;
+            background-size: cover;
+          }
         }
         .text {
-          float: left;
-          margin-left: 15px;
-          .video-name {
-            font-weight: bold;
-            font-size: 16px;
-            color: @black;
+          background-color: #EDEDED;
+          padding: 5px;
+          margin-bottom: 10px;
+          white-space: nowrap;
+
+          * {  
+            display: block;
+            color: #2D2D2D;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
           }
-          .description {
-            color: gray;
-          }
+        }
+      }
+    }
+  }
+
+  .rank-list {
+    margin-top: 70px;
+    box-shadow: 0 1px 10px 0px rgba(0, 0, 0, 0.3), 0 0 0 1px #CFCFCF;
+
+    .title{
+      height: 50px;
+      line-height: 50px;
+      margin-bottom: 10px;
+
+      hr {
+        margin: -1px 0;
+        width: 90%;
+        border-top: 2px solid #E94436;
+      }
+
+      .word1 {
+        font-size: 20px;
+        color: 1a0000;
+      }
+      .word2 {
+        font-size: 20px;
+        color: e74c3c;
+      }
+    }
+    .item {
+
+      height: 70px;
+      padding: 15px 15px;
+      margin: 0 -15px;
+      display: block;
+      border-bottom: 1px solid #CFCFCF;
+
+      &:nth-of-type(2n+0) {
+        background: #f8f8f8;
+      }
+
+      &:nth-of-type(-n+3) {
+        .rank {
+          background-color: #E94436;
+        }
+      }
+
+      .rank {
+        height: 30px;
+        width: 30px;
+        float: left;
+        font-size: 20px;
+        font-weight: bold;
+        background-color: #787878;
+        color: #FFF;
+        padding-left: 10px;
+      }
+
+      .text {
+        float: left;
+        margin-left: 15px;
+        .video-name {
+          font-weight: bold;
+          font-size: 16px;
+          color: @black;
+        }
+        .description {
+          color: gray;
         }
       }
     }
