@@ -69,10 +69,10 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns'], fu
 
         $routeProvider
         .when('/', {
-          templateUrl: '/app/views/index.html',
+          templateUrl: urlPrefix + '/app/views/index.html',
         })
         .when('/home/', {
-          templateUrl: '/app/views/home.html',
+          templateUrl: urlPrefix + '/app/views/home.html',
         })
 
         $locationProvider.html5Mode(true);

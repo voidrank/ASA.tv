@@ -3,6 +3,7 @@ define('headerController', ['app', 'less!headerStyle'], function(app){
   app.controller('header', ['$scope', '$http', 'urlPrefix', 'indexPageUrl', 'github', function($scope, $http, urlPrefix, indexPageUrl, github){
     $scope.indexPageUrl = indexPageUrl;
     $scope.github = github;
+    $scope.urlPrefix = urlPrefix;
     $scope.userLogIO = {
       'authenticated': false,
       'username' : ''
