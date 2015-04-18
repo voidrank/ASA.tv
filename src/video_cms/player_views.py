@@ -29,36 +29,35 @@ class MediaView(View):
         )
 
 
-class DownloadView(View):
-    @staticmethod
-    def get(request, token, *args, **kwargs):
-        try:
-            assert 'HTTP_RANGE' in request.META
-        except Exception as e:
-            return HttpResponseBadRequest(json.dumps({
-                'errstr': 'missing required field'
-            }))
-        try:
-            stream_op = int(request.META['HTTP_RANGE'].split("-")[0][6:])
-        except Exception as e:
-            return HttpResponseBadRequest(json.dumps({
-                'errstr': 'wrong Range format'
-            }))
-        try:
-            stream_ed, content, size = File.get_chunk_by_token(token, stream_op)
-        except Exception as e:
-            return HttpResponse(
-                json.dumps({'errstr': str(e)}),
-                status_code=e.status_code
-            )
-        response = HttpResponse(content, content_type='video/mp4')
-        response.status_code = 206
-        print(response.status_code)
-        response['Accept-Ranges'] = 'bytes'
-        response['Content-Length'] = stream_ed - stream_op + 1
-        response['Content-Range'] = 'bytes %s-%s/%s' % \
-            (stream_op, size - 1, size)
-        return response
+def DownloadView(request, token, *args, **kwargs):
+    try:
+        assert 'HTTP_RANGE' in request.META
+    except Exception as e:
+        return HttpResponseBadRequest(json.dumps({
+            'errstr': 'missing required field'
+        }))
+    try:
+        stream_op = int(request.META['HTTP_RANGE'].split("-")[0][6:])
+    except Exception as e:
+        return HttpResponseBadRequest(json.dumps({
+            'errstr': 'wrong Range format'
+        }))
+    print(token)
+    try:
+        stream_ed, content, size = File.get_chunk_by_token(token, stream_op)
+    except Exception as e:
+        return HttpResponse(
+            json.dumps({'errstr': str(e)}),
+            status_code=e.status_code
+        )
+    response = HttpResponse(content, content_type='video/mp4')
+    response.status_code = 206
+    print(response.status_code)
+    response['Accept-Ranges'] = 'bytes'
+    response['Content-Length'] = stream_ed - stream_op + 1
+    response['Content-Range'] = 'bytes %s-%s/%s' % \
+        (stream_op, size - 1, size)
+    return response
 
 
 class DanmakuView(View):

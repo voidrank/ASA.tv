@@ -6,6 +6,7 @@ var urlPrefix = '';
 require.config({
   baseUrl: urlPrefix + '/app',
   paths: {
+    /* bower_components */
     'jquery': 'bower_components/jquery/dist/jquery.min',
     'angular': 'bower_components/angular/angular',
     'ngRoute': 'bower_components/angular-route/angular-route.min',
@@ -16,6 +17,13 @@ require.config({
     'bootstrap': 'bower_components/bootstrap/dist/js/bootstrap.min',
     'flat-ui': 'bower_components/flat-ui/dist/js/flat-ui.min',
     'domReady': 'bower_components/domReady/domReady',
+    /* ABPlayer */
+    'ABPMobile': 'scripts/services/ABPlayerHTML5/js/ABPMobile',
+    'CommentCoreLibrary': 'scripts/services/ABPlayerHTML5/js/CommentCoreLibrary',
+    'ABPLibxml': 'scripts/services/ABPlayerHTML5/js/ABPLibxml',
+    'ABPlayer': 'scripts/services/ABPlayerHTML5/js/ABPlayer',
+    'player': 'scripts/services/player',
+    'playerStyle': 'scripts/services/ABPlayerHTML5/css/base',
     /* less */
     'less': 'bower_components/require-less/less',
     'lessc': 'bower_components/require-less/lessc',
@@ -31,6 +39,9 @@ require.config({
     'footerController': 'scripts/controllers/footer',
     'indexController': 'scripts/controllers/index',
     'homeController': 'scripts/controllers/home',
+    'videoPlayerController': 'scripts/controllers/videoPlayer',
+    /* bootstrap */
+    'bootstrapStyle': 'bower_components/bootstrap/dist/css/bootstrap.min',
     /* style */
     'indexStyle': 'less/index',
     'footerStyle': 'less/footer',
@@ -68,13 +79,15 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns'], fu
         app.provide = $provide;
 
         $routeProvider
-        .when('/', {
+        .when(urlPrefix + '/', {
           templateUrl: urlPrefix + '/app/views/index.html',
         })
-        .when('/home/', {
+        .when(urlPrefix + '/home/', {
           templateUrl: urlPrefix + '/app/views/home.html',
         })
-
+        .when(urlPrefix + '/rec/:rec', {
+          templateUrl: urlPrefix + '/app/views/videoPlayer.html',
+        })
         $locationProvider.html5Mode(true);
       }])
   .constant(
@@ -99,7 +112,13 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns'], fu
     'collectionUrl', urlPrefix + '/api/collection/'
   )
   .constant(
+    'recToToken', urlPrefix + '/api/video/recToToken/'
+  )
+  .constant(
     'videoCoverUrl', urlPrefix + '/api/video/cover/'
+  )
+  .constant(
+    'sendDanmakuUrl', urlPrefix + '/api/danmaku/'
   )
   .constant(
     'indexUrl', urlPrefix + '/api/index'
@@ -111,7 +130,10 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns'], fu
     'indexPageUrl', urlPrefix + '/'
   )
   .constant(
-    'myUploadUrl', urlPrefix + '/api/video/myupload'
+    'myUploadUrl', urlPrefix + '/api/video/myupload/'
+  )
+  .constant(
+    'resourceUrl', urlPrefix + '/api/resource/'
   )
   .constant(
     'github', 'http://github.com/voidrank/asa.tv'
@@ -126,7 +148,7 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns'], fu
 });
 
 define('render', 
-  ['domReady', "angular", 'app', 'jquery', 'indexController', 'headerController', 'footerController', 'homeController', 'directive'], 
+  ['domReady', "angular", 'app', 'jquery', 'indexController', 'headerController', 'footerController', 'homeController', 'videoPlayerController','directive'], 
   function(domReady, angular, app, $){
     domReady(function(){
 
@@ -139,5 +161,5 @@ define('render',
   }
 );
 
-requirejs(['render', 'css'], function(){
+requirejs(['render', 'css', 'css!bootstrapStyle'], function(){
 });

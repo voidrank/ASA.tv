@@ -10,6 +10,7 @@ define('indexController',
           $http.get(collectionUrl+'/public')
             .success(function(res){
               $scope.collections = res;
+              console.log($scope.collections);
             })
 
 

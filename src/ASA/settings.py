@@ -98,6 +98,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+
+# prefix
+PREFIX_URL = ''
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'app'),
@@ -107,27 +111,6 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
-
-LOGGING_FILE = "log.log"
-LOGGING = {
-    'version': 1,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler'
-        }
-    },
-    'loggers': {
-        'video_cms.player_views': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True
-        }
-    }
-}
-
-# prefix
-PREFIX_URL = ''
 
 # media url
 MEDIA_ROOT = PREFIX_URL + 'app/media'

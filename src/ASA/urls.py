@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = patterns(
     '',
@@ -19,5 +20,11 @@ urlpatterns = patterns(
     url(r'^$', 'ASA.views.app'),
     url(r'^home/$', 'ASA.views.app'),
     url(r'', include('website.urls')),
-    url(r'', include('video_cms.urls')),
+    url(r'rec/[0-9]+', 'ASA.views.app'),
+    url(r'api/resource/(?P<token>[a-zA-Z0-9]{64})/?$', 'video_cms.player_views.DownloadView'),
 ) + static('/app/', document_root='app') + static('/static/', document_root='static')
+
+urlpatterns = patterns(
+    '',
+    url(settings.PREFIX_URL, include(urlpatterns)),
+)

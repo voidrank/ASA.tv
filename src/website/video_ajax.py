@@ -65,8 +65,17 @@ class VideoCoverAJAX(View):
         return super(self.__class__, self).dispatch(*args, **kwargs)
 
 
+def getVideoToken(request, rec):
+    try:
+        file_ = File.objects.get(rec=rec)
+    except Exception:
+        return HttpResponse('', status=404)
+    return JsonResponse({'token':file_.token}, status=201)
+
+
 urlpatterns_video = patterns(
     '',
     url(r'api/video/cover/(?P<rec>[0-9]+)', VideoCoverAJAX.as_view()),
     url(r'api/video/myupload/', myupload),
+    url(r'api/video/recToToken/(?P<rec>[0-9]+)', getVideoToken),
 )

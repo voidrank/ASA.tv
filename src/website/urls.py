@@ -88,5 +88,4 @@ urlpatterns = patterns(
     url(r'api/user', include(urlpatterns_user)),
     url(r'', include(urlpatterns_video)),
     url(r'api/index', include(urlpatterns_index)),
-    url(r'rec/(?P<rec>[0-9]*/?)', MediaView.as_view())
 )
