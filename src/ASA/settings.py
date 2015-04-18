@@ -113,12 +113,12 @@ TEMPLATE_DIRS = (
 )
 
 # media url
-MEDIA_ROOT = PREFIX_URL + 'app/media'
-MEDIA_URL = PREFIX_URL + '/app/media/'
+MEDIA_ROOT = '/' + PREFIX_URL + 'app/media'
+MEDIA_URL = '/' + PREFIX_URL + 'app/media/'
 
 # login redirect
-LOGIN_REDIRECT_URL = '/home/'
-LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/' + PREFIX_URL + 'home/'
+LOGIN_URL = '/' + PREFIX_URL + 'accounts/login/'
 
 # django-guardian
 ANONYMOUS_USER_ID = -1

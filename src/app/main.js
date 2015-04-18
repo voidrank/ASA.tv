@@ -65,7 +65,7 @@ require.config({
       deps: ['angular']
     },
   },
-  urlArgs: 'v' + (new Date()).getTime()
+//  urlArgs: 'v' + (new Date()).getTime()
 });
 
 
