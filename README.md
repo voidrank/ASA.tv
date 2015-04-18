@@ -1,20 +1,24 @@
 # ASA.tv
-
-### branch 说明
-----------------------
-released version: 可运行稳定的版本  
-testing version: 可运行但是可能会有bug的版本  
-develop version: 开发版本.   
-
-### 功能说明
----------------------------------
-1.断点上传  
-2.弹幕播放器  
-3.linux权限控制
+=============================
+#### ASA.tv 计划
+* 开源项目
+* 示例: [复旦大学学生网视频站](http://stu.fudan.edu.cn/asa/)
+* 后台架构基于python-django(计划转移到tornado上), 前端架构基于requirejs&angularjs
+* 易于部署和功能拓展弹幕视频站
+* 支持文件断点上传
+* 欢迎加入
 
 
-### django app
---------------------------------
-cms: 类linux权限控制  
-video_cms: 视频上传(断电上传后台), 播放(html5 player)  
-website: 前端， 融合cms和video_cms的功能.
+==================================
+#### 依赖项
+* 后台 python==3.4.3+(不支持python2), python-django==1.7.1+, django-grappelli==2.6.3+, Pillow==2.7.0+
+* 前端 见src/app/bower.json
+
+
+======
+#### 关于修改urlPrefix
+1.  src/ASA/settings.py中的PREFIX_URL变量
+2.  src/app/main.js中的urlPrefix变量
+3.  给src/app/guide.html中的script标签的src和data-main属性添加urlPrefix
+
+
