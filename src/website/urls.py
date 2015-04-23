@@ -78,14 +78,5 @@ urlpatterns_homepage = patterns(
 
 urlpatterns = patterns(
     r'',
-    url(r'api', include(urlpatterns_perinfo)),
-    url(r'api', include(urlpatterns_register)),
-    url(r'api', include(urlpatterns_homepage)),
-    url(r'', include(urlpatterns_upload)),
     url(r'api', include(urlpatterns_danmaku)),
-    url(r'api', include(urlpatterns_video_list)),
-    url(r'api/collection', include(urlpatterns_collection)),
-    url(r'api/user', include(urlpatterns_user)),
-    url(r'', include(urlpatterns_video)),
-    url(r'api/index', include(urlpatterns_index)),
 )

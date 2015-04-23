@@ -60,7 +60,7 @@ def show(opt):
                 file_.onshow = False
             file_.save()
         else:
-            return HttpResponse("You are not the admin of collection '%s'" % (col.name,), status_code=401)
+            return HttpResponse("You are not the admin of collection '%s'" % (col.name,), status=401)
     return ret_function
 
 
@@ -69,7 +69,7 @@ def add_remove(identity, opt):
     @login_required
     def ret_function(request, collection, username):
         if request.method != 'POST':
-            return HttpResponse(status_code=405)
+            return HttpResponse(status=405)
         try:
             col = Collection.objects.get(name=collection)
         except Exception:
@@ -133,72 +133,72 @@ def public_collections(request):
     )
 
 
-urlpatterns_collection = patterns(
+urlpatterns = patterns(
     '',
 
     # return what collections the current user
     # belongs to as a member(has permission
     # 'member')
     url(
-        r'is_member_of',
+        r'api/collection/is_member_of',
         is_xx_of('group_member')
     ),
     # return what collections the current user
     # belongs to as a admin(has permission
     # 'admin')
     url(
-        r'is_admin_of',
+        r'api/collection/is_admin_of',
         is_xx_of('group_admin')
     ),
     # return what collections the current user
     # belongs to as a root(has permission
     # 'root')
     url(
-        r'is_root_of',
+        r'api/collection/is_root_of',
         is_xx_of('group_root')
     ),
 
 
     # make some video offshow
     url(
-        r'offshow/(?P<token>[a-fA-F0-9]{64}/?)',
+        r'api/collection/offshow/(?P<token>[a-fA-F0-9]{64}/?)',
         show('off'),
     ),
     # make some video onshow
     url(
-        r'onshow/(?P<token>[a-fA-F0-9]{64}/?)',
+        r'api/collection/onshow/(?P<token>[a-fA-F0-9]{64}/?)',
         show('on'),
     ),
 
 
     # add member to collection
     url(
-        r'add/member/(?P<collection>[a-zA-Z0-9]*)/(?P<username>[a-zA-Z0-9]*)/',
+        r'api/collection/add/member/(?P<collection>[a-zA-Z0-9]*)/(?P<username>[a-zA-Z0-9]*)/',
         add_remove('group_member', 'add')
     ),
     # remove member from collection
     url(
-        r'remove/member/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
+        r'api/collection/remove/member/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
         add_remove('group_member', 'remove')
     ),
     # add admin to collection
     url(
-        r'add/admin/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
+        r'api/collection/add/admin/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
         add_remove('group_admin', 'add')
     ),
     # remove admin to collection
     url(
-        r'remove/admin/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
+        r'api/collection/remove/admin/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
         add_remove('group_admin', 'remove')
     ),
     # add root to collection
     url(
-        r'add/root/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
+        r'api/collection/add/root/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
         add_remove('group_root', 'add')
     ),
     # remove root to collection
     url(
-        r'remove/root/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
+        r'api/collection/remove/root/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
         add_remove('group_root', 'remove')
     ),
 

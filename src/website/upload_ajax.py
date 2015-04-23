@@ -6,7 +6,6 @@ try:
 except Exception:
     import json
 
-from django.conf.urls import patterns, url
 from django.http import HttpResponse, JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.generic import View
@@ -61,6 +60,9 @@ class InitView(video_cms.upload_views.InitView):
         return super(InitView, self).dispatch(request, *args, **kwargs)
 
 
+init = InitView.as_view()
+
+
 def auth_check(user, owner):
     owner = Session.objects.get(token=owner)
     if owner.ext.uploader != user:
@@ -104,6 +106,9 @@ class ChunkView(video_cms.upload_views.ChunkView):
         return super(ChunkView, self).dispatch(request, owner, *args, **kwargs)
 
 
+chunk = ChunkView.as_view()
+
+
 class FinalizeView(video_cms.upload_views.FinalizeView):
     def get(self, request, owner, *args, **kwargs):
         session = Session.objects.get(token=owner)
@@ -138,6 +143,9 @@ class FinalizeView(video_cms.upload_views.FinalizeView):
         return super(FinalizeView, self).dispatch(*args, **kwargs)
 
 
+finalize = FinalizeView.as_view()
+
+
 class DestroyView(video_cms.upload_views.DestroyView):
 
     def get(self, request, owner, *args, **kwargs):
@@ -154,6 +162,9 @@ class DestroyView(video_cms.upload_views.DestroyView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(DestroyView, self).dispatch(*args, **kwargs)
+
+
+destroy = DestroyView.as_view()
 
 
 class SessionsView(View):
@@ -178,6 +189,9 @@ class SessionsView(View):
         return super(SessionsView, self).dispatch(*args, **kwargs)
 
 
+session = SessionsView.as_view()
+
+
 @login_required
 def GenericPerInfo(request):
     return HttpResponse(json.dumps({
@@ -192,6 +206,8 @@ def AdvacedPerInfo(request):
     return HttpResponse(json.dumps({
         'chunksize': info.default_chunksize,
     }))
+
+
 @login_required
 def mygroup(request):
     return HttpResponse(json.dumps(
@@ -262,37 +278,3 @@ class AvatarView(View):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(AvatarView, self).dispatch(*args, **kwargs)
-
-
-urlpatterns_upload = patterns(
-    r'',
-    url(
-        r'api/upload/init/?',
-        InitView.as_view(),
-        name='init'
-    ),
-
-    url(
-        r'api/upload/chunk/(?P<owner>[a-fA-F0-9]{64})/?',
-        ChunkView.as_view(),
-        name='chunk'
-    ),
-
-    url(
-        r'api/upload/store/(?P<owner>[a-fA-F0-9]{64})/?',
-        FinalizeView.as_view(),
-        name='store'
-    ),
-
-    url(
-        r'api/upload/destroy/(?P<owner>[a-fA-F0-9]{64}/?)',
-        DestroyView.as_view(),
-        name='destroy'
-    ),
-
-    url(
-        r'api/upload/session/$',
-        SessionsView.as_view(),
-        name='sessions'
-    )
-)

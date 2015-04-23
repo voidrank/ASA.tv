@@ -39,3 +39,6 @@ class DanmakuView(View):
             size=int(data['size'])
         )
         return JsonResponse({'status': 'OK'})
+
+
+danmaku = DanmakuView.as_view()

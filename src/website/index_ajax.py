@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from .models import *
 
 
-def get_index_info(request):
+def index(request):
     return JsonResponse({
         'recommandation': sorted(
             list(
@@ -32,9 +32,3 @@ def get_index_info(request):
             )
         )
     })
-
-
-urlpatterns_index = patterns(
-    '',
-    url(r'', get_index_info),
-)
