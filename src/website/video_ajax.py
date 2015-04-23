@@ -1,6 +1,5 @@
 import os
 
-from django.conf.urls import patterns, url
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required

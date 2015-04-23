@@ -1,6 +1,5 @@
 from django.http import JsonResponse, Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.conf.urls import patterns, url
 from django.contrib.auth.models import User
 
 
@@ -44,6 +43,24 @@ def is_xx_of(identity):
     return ret_function
 
 
+# return what collections the current user
+# belongs to as a member(has permission
+# 'member')
+is_member_of = is_xx_of('group_member')
+
+
+# return what collections the current user
+# belongs to as a admin(has permission
+# 'admin')
+is_admin_of = is_xx_of('group_admin')
+
+
+# return what collections the current user
+# belongs to as a root(has permission
+# 'root')
+is_root_of = is_xx_of('group_root')
+
+
 def show(opt):
 
     @login_required
@@ -62,6 +79,13 @@ def show(opt):
         else:
             return HttpResponse("You are not the admin of collection '%s'" % (col.name,), status=401)
     return ret_function
+
+
+# make some video offshow
+off_show = show('off')
+
+# make some video onshow
+on_show = show('on')
 
 
 def add_remove(identity, opt):
@@ -95,6 +119,24 @@ def add_remove(identity, opt):
             return HttpResponse("you are not the '%s' of collection '%s'" % (collection, username))
     return ret_function
 
+
+# add member to collection
+add_member = add_remove('group_member', 'add')
+
+# remove member from collection
+remove_member = add_remove('group_member', 'remove')
+
+# add admin to collection
+add_admin = add_remove('group_admin', 'add')
+
+# remove admin to collection
+remove_admin = add_remove('group_admin', 'remove')
+
+# add root to collection
+add_root = add_remove('group_root', 'add')
+
+# remove root to collection
+remove_root = add_remove('group_root', 'remove')
 
 def get_video_list(request, collection, op):
     try:
@@ -131,87 +173,3 @@ def public_collections(request):
         ),
         safe=False
     )
-
-
-urlpatterns = patterns(
-    '',
-
-    # return what collections the current user
-    # belongs to as a member(has permission
-    # 'member')
-    url(
-        r'api/collection/is_member_of',
-        is_xx_of('group_member')
-    ),
-    # return what collections the current user
-    # belongs to as a admin(has permission
-    # 'admin')
-    url(
-        r'api/collection/is_admin_of',
-        is_xx_of('group_admin')
-    ),
-    # return what collections the current user
-    # belongs to as a root(has permission
-    # 'root')
-    url(
-        r'api/collection/is_root_of',
-        is_xx_of('group_root')
-    ),
-
-
-    # make some video offshow
-    url(
-        r'api/collection/offshow/(?P<token>[a-fA-F0-9]{64}/?)',
-        show('off'),
-    ),
-    # make some video onshow
-    url(
-        r'api/collection/onshow/(?P<token>[a-fA-F0-9]{64}/?)',
-        show('on'),
-    ),
-
-
-    # add member to collection
-    url(
-        r'api/collection/add/member/(?P<collection>[a-zA-Z0-9]*)/(?P<username>[a-zA-Z0-9]*)/',
-        add_remove('group_member', 'add')
-    ),
-    # remove member from collection
-    url(
-        r'api/collection/remove/member/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
-        add_remove('group_member', 'remove')
-    ),
-    # add admin to collection
-    url(
-        r'api/collection/add/admin/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
-        add_remove('group_admin', 'add')
-    ),
-    # remove admin to collection
-    url(
-        r'api/collection/remove/admin/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
-        add_remove('group_admin', 'remove')
-    ),
-    # add root to collection
-    url(
-        r'api/collection/add/root/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
-        add_remove('group_root', 'add')
-    ),
-    # remove root to collection
-    url(
-        r'api/collection/remove/root/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/',
-        add_remove('group_root', 'remove')
-    ),
-
-
-    # get video list
-    url(
-        r'video/(?P<collection>[a-zA-Z0-9_]*)/(?P<op>[0-9]*)/',
-        get_video_list
-    ),
-
-    # get public collections
-    url(
-        r'public',
-        public_collections
-    ),
-)

@@ -192,6 +192,9 @@ class SessionsView(View):
 session = SessionsView.as_view()
 
 
+# --------------------this part may be useless---------------------
+
+
 @login_required
 def GenericPerInfo(request):
     return HttpResponse(json.dumps({

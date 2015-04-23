@@ -1,4 +1,3 @@
-from django.conf.urls import url, patterns
 from django.http import JsonResponse
 from .models import *
 
