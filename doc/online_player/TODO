@@ -1,6 +1,4 @@
 1. compatible with upload module    (DONE)
 2. file chunk read                  (DONE)
-3. foreground js player             (DELAY)
+3. frontend js player               (DONE)
 4. auth                             (TODO)
-
-
