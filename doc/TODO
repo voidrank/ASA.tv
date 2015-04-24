@@ -15,3 +15,5 @@
 6. celery
 
 7. redis?
+
+8. ajax csrf
