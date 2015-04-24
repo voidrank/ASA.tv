@@ -34,7 +34,6 @@ urlpatterns = patterns(
 
     # django stream response
     url(r'api/resource/(?P<token>[a-zA-Z0-9]{64})/?$', 'video_cms.player_views.DownloadView'),
-    url(r'', include('website.urls')),
 
     # video
     url(r'api/video/cover/(?P<rec>[0-9]+)', 'website.video_ajax.video_cover_ajax'),
