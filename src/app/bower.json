@@ -16,6 +16,7 @@
     "less": "~2.5.0",
     "require-less": "~0.1.5",
     "requirejs": "~2.1.17",
-    "angular-dropdowns": "~1.1.0"
+    "angular-dropdowns": "~1.1.0",
+    "blueimp-file-upload":"~9.9.3"
   }
 }
