@@ -138,6 +138,9 @@ define('Uploader', [], function(){
       for (var p = 0; p < parseInt( (file.size - 1) / checksumchunk + 1); p++) {
         chain = chain.then(function(pos) {
           return new Promise(function(resolve, reject) {
+			  
+			if (this.__canceled__) reject(new Error("User Canceled")); 
+			  
             var thischunk = pos+checksumchunk < file.size ? checksumchunk : file.size-pos;
             reader.onload = function() {
               checksumprog = pos / file.size * 100;
@@ -198,6 +201,9 @@ define('Uploader', [], function(){
         for (var i = seqnow; i < seqs; i++) {
           upchain = upchain.then(function(seq) {
             return new Promise(function(resolve, reject){
+				
+			  if (this.__canceled__) reject(new Error("User Canceled")); 
+				
               var offset = config.chunksize * seq;
               var chunksize = offset + config.chunksize*2 <= file.size ? config.chunksize : file.size - offset;
               var reader = new FileReader();
@@ -235,6 +241,27 @@ define('Uploader', [], function(){
       });
     };
 
+    Uploader.prototype.__canceled__ = false;
+    Uploader.prototype.cancel = function() {
+		this.__canceled__ = true;
+	};
+	
+	Uploader.prototype.__events__ = {};
+	Uploader.prototype.on = function(evt, cb) {
+		if (typeof evt !== "string") throw new Error("Event name is not a string");
+		if (typeof cb !== "function") throw new Error("Event listener is not a function");
+		if (typeof this.__events__[evt] === "undefined") {
+			this.__events__[evt] = [];
+		}
+		this.__events__[evt].push(cb);
+	};
+	Uploader.prototype.__emit__ = function(evt) {
+		if (typeof this.__events__[evt] === "undefined") return;
+		var args = Array.prototype.slice.call(arguements, 1);
+		this.__events__[evt].map(function(cb) {
+			cb.apply(this, args);
+		});
+	};
   })();
 
 
