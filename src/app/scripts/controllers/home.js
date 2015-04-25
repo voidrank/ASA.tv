@@ -78,14 +78,6 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
             $scope.uploadCounts--;
             $scope.uploadnext();
 		});
-		  /* state:
-			 0: set up
-			 1: queued up
-			 2: checksum
-			 3: upload
-			 4: succeeded
-			 999: failed
-			 */
 		uploadinst.state = 0;
 		return uploadinst;
     };
@@ -109,7 +101,6 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
           break;
         }
       }
-      console.log(index);
       if (index < $scope.allvideofiles.length) {
         $scope.allvideofiles.splice(index, 1);
       }
