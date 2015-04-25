@@ -53,61 +53,56 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
     // video upload
     // file object
     var fileuploadobj = function(file) {
-      this.file = file;
-      this.name = file.name;
-      /* state:
-         0: set up
-         1: queued up
-         2: checksum
-         3: upload
-         4: succeeded
-         999: failed
-         */
-      this.state = 0;
-      this.progress = {
-        checksum: 0,
-        upload: 0
-      };
-    };
-    fileuploadobj.prototype.queue = function() {
-      this.state = 1;
-      $scope.uploadQueue.push(this);
-      $scope.uploadnext();
-    };
-    fileuploadobj.prototype.upload = function() {
-      $scope.uploadCounts++;
-      var ngfileobj = this;
-      ngfileobj.state = 2;
-      var uploadinst = new Uploader(ngfileobj.file,
-          function(obj){
-            ngfileobj.progress.checksum = obj.checksumprog;
-            ngfileobj.progress.upload = obj.uploadprog;
-            if (obj.checksumprog == 100) {
-              ngfileobj.state = 3;
+		var uploadinst = new Uploader(file, {
+			url: apiUrl + '/',
+			filename: file.name,
+			collection: $scope.collection.selected.name,
+		});
+		uploadinst.on("progress", function(progress){;
+            if (progress.checksum == 100) {
+              this.state = 3;
             }
             $scope.$apply();
-          },
-          {
-            url: apiUrl + '/',
-            filename: ngfileobj.name,
-            collection: $scope.collection.selected.name,
-          },
-          function(res){
-            ngfileobj.state = 4;
+		});
+		uploadinst.on("finish", function(res){
+            this.state = 4;
             $scope.$apply();
             $scope.uploadCounts--;
             $scope.uploadnext();
             uploadVideoCover.startUpload(res.rec);
-          },
-          function(err){
-            console.log(err);
-            ngfileobj.state = 999;
+		});
+		uploadinst.on("error", function(err){
+            console.log(err.stack);
+            this.state = 999;
             $scope.$apply();
             $scope.uploadCounts--;
             $scope.uploadnext();
-          });
+		});
+		  /* state:
+			 0: set up
+			 1: queued up
+			 2: checksum
+			 3: upload
+			 4: succeeded
+			 999: failed
+			 */
+		uploadinst.state = 0;
+		return uploadinst;
     };
-    fileuploadobj.prototype.remove = function() {
+    Uploader.prototype.queue = function() {
+      this.state = 1;
+      $scope.uploadQueue.push(this);
+      $scope.uploadnext();
+    };
+    Uploader.prototype.startupload = function() {
+      $scope.uploadCounts++;
+      this.config.collection = $scope.collection.selected.name;
+      this.state = 2;
+      this.upload();
+      $scope.$apply();
+    };
+    Uploader.prototype.remove = function() {
+	  if (this.state >= 2) this.cancel();
       var index = 0;
       for (; index < $scope.allvideofiles.length; index++) {
         if ($scope.allvideofiles[index] === this) {
@@ -135,9 +130,8 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
     $scope.changeVideoFiles = function() {
       console.log($scope.videofiles);
       for (var i=0; i<$scope.videofiles.length; i++) {
-        $scope.allvideofiles.push(new fileuploadobj($scope.videofiles[i]));
+        $scope.allvideofiles.push(fileuploadobj($scope.videofiles[i]));
       }
-      console.log($scope.allvideofiles);
     };
     //end of videoupload
 

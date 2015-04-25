@@ -53,13 +53,13 @@
                 </div>
                 <div class="row-info col-xs-12" ng-repeat="file in allvideofiles">
                   <div class="col-xs-8 video-name" ng-click="alert(file.state);">
-                      <input type="text" ng-readonly="file.state!=0" ng-model="file.name">
+                      <input type="text" ng-readonly="file.state!=0" ng-model="file.config.filename">
                   </div>
                   <div class="col-xs-4 video-progress">
-                    <button ng-show="file.state==0" ng-click="file.upload()">开始上传</button>
+                    <button ng-show="file.state==0" ng-click="file.startupload()">开始上传</button>
                     <div ng-show="file.state!=0" class="progress-bar">
-                        <div class="progress-bar checksum" ng-style="{ 'width':file.progress.checksum+'%' }"></div>
-                        <div class="progress-bar upload" ng-style="{ 'width':file.progress.upload+'%' }"></div>
+                        <div class="progress-bar checksum" ng-style="{ 'width':file.__progress__.checksum+'%' }"></div>
+                        <div class="progress-bar upload" ng-style="{ 'width':file.__progress__.upload+'%' }"></div>
                     </div>
                       <div ng-show="file.state==1">等待上传</div>
                       <div ng-show="file.state==2">正在计算校验</div>
@@ -67,6 +67,7 @@
                       <div ng-show="file.state==4">上传完成</div>
                       <div ng-show="file.state==999">上传失败</div>
                   </div>
+                      <div ng-click="file.remove()">删除</div>
                 </div>
                 <div ng-change="changeVideoFiles()" ng-model="videofiles" file-upload multiple class="glyphicon glyphicon-plus add"> </div>
               </div>
