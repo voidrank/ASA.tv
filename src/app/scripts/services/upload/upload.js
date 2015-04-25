@@ -1,3 +1,4 @@
+'use strict';
 /**
  * @file upload.js 
  * A simple uploader with resume support
@@ -5,10 +6,8 @@
  * @author swordfeng
  * @author voidrank
  **/
-
 define('Uploader', [], function() {
     var Uploader;
-    var sha256 = {};
     (function() {
 
         /**
@@ -22,12 +21,12 @@ define('Uploader', [], function() {
          * @return
          **/
         function ajax(method, url, data, headers) {
-            if (typeof data == "undefined") data = null;
-            if (typeof headers == "undefined") headers = {};
+            if (typeof data === "undefined") data = null;
+            if (typeof headers === "undefined") headers = {};
             return new Promise(function(resolve, reject) {
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4) {
+                    if (xhr.readyState === 4) {
                         if (xhr.status > 0 && xhr.status < 400) {
                             resolve(xhr.responseText);
                         } else {
@@ -60,57 +59,27 @@ define('Uploader', [], function() {
          * @param file :File html file object
          * @param onStatusChange(info_obj) :function called when checksum/upload status change
          * @param config :object a set of config
-         * @param callback :function(result) called when finished
-         * @param onerror :function(err) called when exception occurs
+         * @param callback :function (result) called when finished
+         * @param onerror :function (err) called when exception occurs
          *
          * @return a new upload object, which represents a file that is being uploaded
          * @exception
          **/
-        Uploader = function(file, onStatusChange, config, callback, onerror) {
+        Uploader = function(file, config) {
 
-            /** checksum progress **/
-            Object.defineProperty(this, "checksumprog", {
-                get: function() {
-                    return checksumprog;
-                }
-            });
-            /** checksum result **/
-            Object.defineProperty(this, "checksum", {
-                get: function() {
-                    return sum;
-                }
-            });
-            /** upload progress **/
-            Object.defineProperty(this, "uploadprog", {
-                get: function() {
-                    return uploadprog;
-                }
-            });
+            var sha256 = new SHA256();
 
-            // defaults
-            if (typeof onStatusChange != "function")
-                onStatusChange = function(obj) {};
-            if (typeof callback != "function")
-                callback = function() {};
-            if (typeof onerror != "function")
-                onerror = function(e) {
-                    throw e
-                };
+            if (typeof(config['url']) === "undefined")
+                throw new Error("url is not defined");
 
-            if (typeof config == "undefined" || config == null)
-                var config = {};
             config['size'] = file.size;
-            if (typeof(config['url']) == "undefined")
-                config["url"] = window.location.href;
-            if (typeof(config['collection']) == "undefined")
-                config['collection'] = ['test'];
-            if (typeof(config['chunksize']) == "undefined")
+            if (typeof(config['chunksize']) === "undefined")
                 config['chunksize'] = 1048576;
-            if (typeof(config['filename']) == "undefined")
+            if (typeof(config['filename']) === "undefined")
                 config['filename'] = file.name;
 
             // self object
-            var obj = this;
+            var self = this;
 
             // upload token
             var token;
@@ -129,32 +98,29 @@ define('Uploader', [], function() {
             // checksum chunk size
             var checksumchunk = 131072;
 
-            // checksum result
-            var sum;
-
             // progress values in percentage
-            var checksumprog = 0;
-            var uploadprog = 0;
-
-            // start working
-            onStatusChange(obj);
+            this.__progress__ = {
+                checksum = 0,
+                    upload = 0,
+            };
 
             /* --- STAGE 1 --- */
             /* checksum before upload */
             sha256.sha256_init();
             /* init promise */
-            var chain = Promise.resolve(0);
+            var chain = Promise.resolve(0).then(function() {
+                this.__emit__("init");
+            });
             /* calculate sha256sum */
             for (var p = 0; p < parseInt((file.size - 1) / checksumchunk + 1); p++) {
                 chain = chain.then(function(pos) {
                     return new Promise(function(resolve, reject) {
-
                         if (this.__canceled__) reject(new Error("User Canceled"));
-
                         var thischunk = pos + checksumchunk < file.size ? checksumchunk : file.size - pos;
                         reader.onload = function() {
-                            checksumprog = pos / file.size * 100;
-                            onStatusChange(obj);
+                            this.__progress__.checksum = pos / file.size * 100;
+                            this.__emit__("progress", self.progress);
+                            this.__emit__("progressChecksum", self.progress);
                             sha256.sha256_update(new Uint8Array(this.result), thischunk);
                             resolve(pos + thischunk);
                         };
@@ -164,100 +130,100 @@ define('Uploader', [], function() {
             }
             /* finalize sha256sum */
             chain = chain.then(function() {
-                    sha256.sha256_final();
-                    sum = sha256.sha256_encode_hex();
-                    console.log('file checksum: ' + sum);
-                    checksumprog = 100;
-                    onStatusChange(obj);
-                })
-                /* --- STAGE 2 --- */
-                /* get token from sessions && return last seq */
-                .then(function() {
-                    console.log(config.url + "upload/session/");
-                    return ajax("GET", config.url + "upload/session/");
-                })
-                .then(parseJSON)
-                .then(function(sessions) {
-                    var f = 0;
-                    for (; f < sessions.length; f++) {
-                        if (sessions[f].hash == sum) break;
-                    }
-                    if (f >= sessions.length) {
-                        config['hash'] = sum;
-                        return ajax("POST", config.url + "upload/init/", JSON.stringify(config))
-                            .then(parseJSON)
-                            .then(function(res) {
-                                token = res.token;
-                                return 0;
-                            })
-                    } else {
-                        token = sessions[f].token;
-                        if (sessions[f].chunksize) config.chunksize = sessions[f].chunksize;
-                        return ajax("GET", config.url + "upload/chunk/" + token)
-                            .then(parseJSON)
-                            .then(function(res) {
-                                var list = [];
-                                for (var i = 0; i < seqs; i++) list[i] = false;
-                                for (var i = 0; i < res.length; i++) {
-                                    list[res[i].seq] = true;
-                                }
-                                seqnow = seqs;
-                                for (var i = 0; i < seqs; i++)
-                                    if (!list[i]) {
-                                        seqnow = i;
-                                        break;
-                                    }
-                                return seqnow;
-                            });
-                    }
-                })
-                /* --- STAGE 3 --- */
-                /* upload chunks */
-                .then(function(seqnow) {
-                    var upchain = Promise.resolve(seqnow);
-                    for (var i = seqnow; i < seqs; i++) {
-                        upchain = upchain.then(function(seq) {
-                            return new Promise(function(resolve, reject) {
-
-                                if (this.__canceled__) reject(new Error("User Canceled"));
-
-                                var offset = config.chunksize * seq;
-                                var chunksize = offset + config.chunksize * 2 <= file.size ? config.chunksize : file.size - offset;
-                                var reader = new FileReader();
-                                reader.onload = function(e) {
-                                    onStatusChange(obj);
-                                    var data = new Uint8Array(this.result);
-                                    var hash = sha256.sha256_digest(data);
-                                    ajax("PUT", config.url + "upload/chunk/" + token + "/?hash=" + hash + "&seq=" + seq, this.result, {
-                                        "Content-Type": "application/x-www-form-urlencoded"
-                                    }).then(function(m) {
-                                        uploadprog = offset * 100 / file.size;
-                                        onStatusChange(obj);
-                                    }).then(function() {
-                                        resolve(seq + 1)
-                                    });
-                                };
-                                reader.readAsArrayBuffer(file.slice(offset, offset + chunksize));
-                            });
-                        });
-                    }
-                    return upchain;
-                })
-                /* --- STAGE 4 --- */
-                /* finish upload */
-                .then(function(seq) {
-                    uploadprog = 100;
-                    onStatusChange(obj);
-                    return ajax("GET", config.url + "upload/store/" + token);
-                })
-                .then(parseJSON)
-                .then(function(res) {
-                    console.log(res);
-                    callback(res);
-                })
-                .catch(function(e) {
-                    onerror(e);
-                });
+				sha256.sha256_final();
+				this.__sum__ = sha256.sha256_encode_hex();
+				this.__progress__.checksum = 100;
+				this.__emit__("checksum", self.progress);
+			})
+			/* --- STAGE 2 --- */
+			/* get token from sessions && return last seq */
+			.then(function() {
+				return ajax("GET", config.url + "upload/session/");
+			})
+			.then(parseJSON)
+			.then(function(sessions) {
+				sessions.map(function(sess) {
+					if (sess.hash === this.__sum__) {
+						return sess;
+					}
+				});
+				return false;
+			})
+			.then(function(sess) {
+				if (!sess) {
+					config['hash'] = this.__sum__;
+					return ajax("POST", config.url + "upload/init/", JSON.stringify(config))
+						.then(parseJSON)
+						.then(function(res) {
+							token = res.token;
+							return 0;
+						})
+				} else {
+					token = sess.token;
+					if (sess.chunksize) config.chunksize = sess.chunksize;
+					return ajax("GET", config.url + "upload/chunk/" + token)
+						.then(parseJSON)
+						.then(function(res) {
+							var list = [];
+							for (var i = 0; i < seqs; i++) list[i] = false;
+							for (var i = 0; i < res.length; i++) {
+								list[res[i].seq] = true;
+							}
+							seqnow = seqs;
+							for (var i = 0; i < seqs; i++)
+								if (!list[i]) {
+									seqnow = i;
+									break;
+								}
+							return seqnow;
+						});
+				}
+			})
+			/* --- STAGE 3 --- */
+			/* upload chunks */
+			.then(function(seqnow) {
+				var upchain = Promise.resolve(seqnow);
+				for (var i = seqnow; i < seqs; i++) {
+					upchain = upchain.then(function(seq) {
+						return new Promise(function(resolve, reject) {
+							if (this.__canceled__) reject(new Error("User Canceled"));
+							var offset = config.chunksize * seq;
+							var chunksize = offset + config.chunksize * 2 <= file.size ? config.chunksize : file.size - offset;
+							var reader = new FileReader();
+							reader.onload = function(e) {
+								var data = new Uint8Array(this.result);
+								var hash = sha256.sha256_digest(data);
+								ajax("PUT", config.url + "upload/chunk/" + token + "/?hash=" + hash + "&seq=" + seq, this.result, {
+									"Content-Type": "application/x-www-form-urlencoded"
+								}).then(function(m) {
+									this.__progress__.upload = offset * 100 / file.size;
+									this.__emit__("progress", this.progress);
+									this.__emit__("progressUpload", this.progress);
+								}).then(function() {
+									resolve(seq + 1);
+								});
+							};
+							reader.readAsArrayBuffer(file.slice(offset, offset + chunksize));
+						});
+					});
+				}
+				return upchain;
+			})
+			/* --- STAGE 4 --- */
+			/* finish upload */
+			.then(function(seq) {
+				this.__emit__("progress", this.progress);
+				this.__emit__("progressUpload", this.progress);
+				this.__emit__("upload");
+				return ajax("GET", config.url + "upload/store/" + token);
+			})
+			.then(parseJSON)
+			.then(function(res) {
+				this.__emit__("finish");
+			})
+			.catch(function(e) {
+				this.__emit__("error", e)
+			});
         };
 
         Uploader.prototype.__canceled__ = false;
@@ -267,8 +233,8 @@ define('Uploader', [], function() {
 
         Uploader.prototype.__events__ = {};
         Uploader.prototype.on = function(evt, cb) {
-            if (typeof evt !== "string") throw new Error("Event name is not a string");
-            if (typeof cb !== "function") throw new Error("Event listener is not a function");
+            if (typeof evt === "string") throw new Error("Event name is not a string");
+            if (typeof cb === "function") throw new Error("Event listener is not a function");
             if (typeof this.__events__[evt] === "undefined") {
                 this.__events__[evt] = [];
             }
@@ -281,15 +247,31 @@ define('Uploader', [], function() {
                 cb.apply(this, args);
             });
         };
+
+        Uploader.prototype.progress = {
+            get checksum: function() {
+                return this.__progress__.checksum;
+            },
+            get upload: function() {
+                return this.__progress__.upload;
+            }
+        };
+
+        Object.defineProperty(Uploader.prototype, "checksum", {
+            get: function() {
+                return this.__sum__;
+            }
+        });
+
     })();
 
 
     /*
      * A JavaScript implementation of the SHA256 hash function.
      *
-     * FILE:	sha256.js
-     * VERSION:	0.8
-     * AUTHOR:	Christoph Bichlmeier <informatik@zombiearena.de>
+     * FILE:    sha256.js
+     * VERSION:    0.8
+     * AUTHOR:    Christoph Bichlmeier <informatik@zombiearena.de>
      *
      * NOTE: This version is not tested thoroughly!
      *
@@ -323,7 +305,7 @@ define('Uploader', [], function() {
      * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
-    (function() {
+    var SHA256 = function() {
         "use strict";
         /* SHA256 logical functions */
         function rotateRight(n, x) {
@@ -515,7 +497,7 @@ define('Uploader', [], function() {
         }
 
         /* Split the internal hash values into an array of bytes */
-        sha256.sha256_encode_bytes = function() {
+        this.sha256_encode_bytes = function() {
             var j = 0;
             var output = new Array(32);
             for (var i = 0; i < 8; i++) {
@@ -528,7 +510,7 @@ define('Uploader', [], function() {
         }
 
         /* Get the internal hash as a hex string */
-        sha256.sha256_encode_hex = function() {
+        this.sha256_encode_hex = function() {
             var output = new String();
             for (var i = 0; i < 8; i++) {
                 for (var j = 28; j >= 0; j -= 4)
@@ -539,17 +521,17 @@ define('Uploader', [], function() {
 
         /* Main function: returns a hex string representing the SHA256 value of the 
         given data */
-        sha256.sha256_digest = function(data) {
+        this.sha256_digest = function(data) {
             sha256_init();
             sha256_update(data, data.length);
             sha256_final();
             return sha256.sha256_encode_hex();
         }
 
-        sha256.sha256_init = sha256_init;
-        sha256.sha256_update = sha256_update;
-        sha256.sha256_final = sha256_final;
+        this.sha256_init = sha256_init;
+        this.sha256_update = sha256_update;
+        this.sha256_final = sha256_final;
 
-    })();
+    };
     return Uploader;
 });
