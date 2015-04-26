@@ -96,7 +96,10 @@ define('directive', ['app', 'jquery'], function(app, $){
 				newValue.push(fileElement.files[i]);
 			}
             ngModel.$setViewValue(newValue);
-            // reset file element
+            /* reset file element, clear fileElements.files
+             * this a hack, as there seems no normal methods that can easily
+             * clear the FileList object.
+             */
             fileElement.outerHTML = fileElement.outerHTML;
 		  });
         }; // return

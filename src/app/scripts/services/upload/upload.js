@@ -42,6 +42,9 @@ define('Uploader', [], function() {
             });
         }
         
+        /** 
+         * file reader
+         **/
         function fReader(blob) {
 			return new Promise(function(resolv, reject) {
 				var reader = new FileReader();
@@ -70,13 +73,22 @@ define('Uploader', [], function() {
          * Uploader Object Constructor
          *
          * @param file :File html file object
-         * @param onStatusChange(info_obj) :function called when checksum/upload status change
          * @param config :object a set of config
-         * @param callback :function (result) called when finished
-         * @param onerror :function (err) called when exception occurs
          *
          * @return a new upload object, which represents a file that is being uploaded
          * @exception
+         * 
+         * Uploader.config - the set config object
+         * 
+         * Events:
+         * progress(progress) - progress update
+         * progressChecksum(progress)
+         * progressUpload(progress)
+         * 
+         * checksum(sum) - checksum finished
+         * upload - uploading finished
+         * finish(result) - file stored successfully
+         * 
          **/
         Uploader = function(file, config) {
 
