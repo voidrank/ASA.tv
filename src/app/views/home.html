@@ -54,7 +54,7 @@
                 <input type="text" ng-readonly="file.state!=0" ng-model="file.config.filename">
               </div>
               <div class="col-xs-5 video-upload-progress">
-                <div class="progress" ng-show="file.state!=0">
+                <div class="progress">
                   <div ng-show="file.state==1" class="state">等待上传</div>
                   <div ng-show="file.state==2" class="state">正在计算校验</div>
                   <div ng-show="file.state==3" class="state">正在上传</div>
@@ -66,7 +66,7 @@
               </div>
               <div class="col-xs-4 video-upload-control">
                 <button ng-show="file.state==0" ng-click="file.startupload()" class="col-xs-6">开始上传</button>
-                <button ng-show="file.state=999" ng-click="file.startupload()" class="col-xs-6">重新上传</button>
+                <button ng-show="file.state==999" ng-click="file.startupload()" class="col-xs-6">重新上传</button>
                 <button ng-click="file.remove()" ng-show="file.state=0" ng-show="file.state==999" class="col-xs-6">删除</button>
               </div>
             </div>
