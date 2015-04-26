@@ -88,6 +88,10 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
     };
     Uploader.prototype.startupload = function() {
       $scope.uploadCounts++;
+      if ($scope.collection.selected.name == "请选择"){
+        alert("请选择上传分类");
+        return;
+      }
       this.config.collection = $scope.collection.selected.name;
       this.state = 2;
       this.upload();
