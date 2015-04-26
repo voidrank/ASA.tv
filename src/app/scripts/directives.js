@@ -96,6 +96,8 @@ define('directive', ['app', 'jquery'], function(app, $){
 				newValue.push(fileElement.files[i]);
 			}
             ngModel.$setViewValue(newValue);
+            // reset file element
+            fileElement.outerHTML = fileElement.outerHTML;
 		  });
         }; // return
       } //link
