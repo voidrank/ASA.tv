@@ -102,7 +102,6 @@ define('Uploader', [], function() {
             this.progress = {
 				__progress__: this.__progress__
 			};
-            console.log("prog set");
             
             
             var sha256 = new SHA256();
@@ -216,7 +215,6 @@ define('Uploader', [], function() {
 			.then(function(seqnow) {
 				var upchain = Promise.resolve(seqnow);
 				for (var i = seqnow; i < seqs; i++) {
-					console.log("seqs:", seqs);
 					upchain = upchain.then(function(seq) {
 						var offset = config.chunksize * seq;
 						var chunksize = offset + config.chunksize * 2 <= file.size ? config.chunksize : file.size - offset;
