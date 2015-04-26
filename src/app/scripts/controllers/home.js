@@ -91,7 +91,6 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
       this.config.collection = $scope.collection.selected.name;
       this.state = 2;
       this.upload();
-      $scope.$apply();
     };
     Uploader.prototype.remove = function() {
 	  if (this.state >= 2) this.cancel();

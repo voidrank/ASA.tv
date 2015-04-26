@@ -1,5 +1,6 @@
 @black: #000000;
 @gray: #cfcfcf;
+@red: #e74c3c;
 
 .home {
   .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
@@ -77,7 +78,7 @@
       .add:before {
         height: 50px;
         width: 50px;
-        margin-top: 50px;
+        margin: 100px 50px 20px 10px;
         cursor: pointer;
       }
       .file-list {
@@ -89,16 +90,32 @@
         font-size: 15px;
         .row-info {
           margin-bottom: 20px;
+          text-align: center;
         }
         .video-name {
           text-align: center;
         }
-        .video-progress {
+        .video-upload-progress {
           text-align: center;
           height: 30px;
-          .progress-bar {
-            height: 50px;
+          .progress {
+            height: 27px;
+            .state {
+              position: absolute;
+              left: 40%;
+              z-index: 999;
+            }
+            .progress-bar {
+              height: 35px;
+              color: #000000;
+              float: left;
+              z-index: 1;
+              background-color: @red;
+            }
           }
+        }
+        .video-upload-control {
+
         }
       }
       .video-cover {
