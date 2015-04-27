@@ -108,6 +108,19 @@ define('homeController', ['app', 'Uploader', 'UploadVideoCover', 'factories', 'l
         $scope.allvideofiles.splice(index, 1);
       }
     };
+    Uploader.prototype.restart = function() {
+      var index = 0;
+      for (; index < $scope.allvideofiles.length; index++) {
+        if ($scope.allvideofiles[index] === this) {
+          break;
+        }
+      }
+      if (index < $scope.allvideofiles.length) {
+        $scope.allvideofiles[index] = fileuploadobj(this.file);
+        $scope.allvideofiles[index].config = this.config;
+        $scope.allvideofiles[index].queue();
+      }
+    };
     // global vars
     $scope.videofiles = [];
     $scope.allvideofiles = [];
