@@ -1,4 +1,4 @@
-# ASA.tv
+I# ASA.tv
 =============================
 #### ASA.tv 计划
 * 开源项目
@@ -11,7 +11,7 @@
 
 ==================================
 #### 依赖项
-* 后台 python==3.4.3+(不支持python2), python-django==1.7.1+, django-grappelli==2.6.3+, Pillow==2.7.0+
+* 后台 python==3.4.3+(python2.7.9+), python-django==1.7.1+, django-grappelli==2.6.3+, Pillow==2.7.0+
 * 前端 见src/app/bower.json
 
 
