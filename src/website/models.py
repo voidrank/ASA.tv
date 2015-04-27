@@ -1,3 +1,5 @@
+from six import with_metaclass
+
 from django.db import models
 from django.contrib.auth.models import Group, User
 
@@ -126,7 +128,7 @@ class BasePerInfoMetaclass(type(models.Model)):
         BasePerInfoMetaclass.Register[name.lower()] = cls
 
 
-class BasePerInfo(models.Model, metaclass=BasePerInfoMetaclass):
+class BasePerInfo(with_metaclass(BasePerInfoMetaclass, models.Model)):
     user = models.OneToOneField('auth.User', related_name='%(class)s')
 
     class Meta:
