@@ -1,6 +1,7 @@
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
-from .models import Danmaku
 from django.views.generic import View
+
+from .models import Danmaku
 
 
 class DanmakuView(View):
@@ -22,12 +23,6 @@ class DanmakuView(View):
                 content_type='application/json'
             )
 
-        assert 'mode' in data
-        assert 'stime' in data
-        assert 'text' in data
-        assert 'color' in data
-        assert 'size' in data
-        assert 'date' in data
         Danmaku.new(
             owner=token,
             user=request.user,
