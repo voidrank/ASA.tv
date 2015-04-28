@@ -1,5 +1,6 @@
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
 from django.views.generic import View
+from django.conf import settings
 
 from .models import Danmaku
 
@@ -12,7 +13,7 @@ class DanmakuView(View):
 
     @staticmethod
     def post(request, token):
-        if request.user.is_anonymous():
+        if request.user.is_anonymous() and getattr(settings, 'ASA_WITH_DANMAKU_AUTH', False):
             return HttpResponse('', status=401)
         try:
             data = request.POST

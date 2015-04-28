@@ -129,3 +129,4 @@ ANONYMOUS_USER_ID = -1
 
 # video with onshow=True can be visited
 ASA_WITH_STRICT_VIDEO_AUTH = 0
+ASA_WITH_DANMAKU_AUTH = 0
