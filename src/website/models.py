@@ -161,7 +161,6 @@ class LoginLog(models.Model):
 # index
 class Recommandation(models.Model):
     id = models.AutoField(primary_key=True)
-    col = models.IntegerField()
     index = models.IntegerField()
     rec = models.IntegerField(null=True, blank=True)
     img = models.ImageField(upload_to="recommandation")
@@ -170,4 +169,4 @@ class Recommandation(models.Model):
     link = models.URLField(null=True, blank=True)
 
     def __str__(self):
-        return "Recommandation %s, index %s" % (self.col, self.index)
+        return "Recommandation %s" % (self.index, )

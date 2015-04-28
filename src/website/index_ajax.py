@@ -8,7 +8,6 @@ def index(request):
             list(
                 map(
                     lambda rcm: {
-                        'col': rcm.col,
                         'index': rcm.index,
                         'link': rcm.link,
                         'title': rcm.title,
@@ -19,7 +18,7 @@ def index(request):
                     Recommandation.objects.all()
                 ),
             ),
-            key=lambda x: (x['col'], x['index'])
+            key=lambda x: (x['index'])
         ),
         'rankList': list(
             map(

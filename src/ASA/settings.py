@@ -114,7 +114,7 @@ TEMPLATE_DIRS = (
 )
 
 # media url
-MEDIA_ROOT = '/' + PREFIX_URL + 'app/media'
+MEDIA_ROOT = 'app/media'
 MEDIA_URL = '/' + PREFIX_URL + 'app/media/'
 
 # login redirect
