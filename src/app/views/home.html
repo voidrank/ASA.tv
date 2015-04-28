@@ -60,8 +60,7 @@
                   <div ng-show="file.state==3" class="state">正在上传</div>
                   <div ng-show="file.state==4" class="state">上传完成</div>
                   <div ng-show="file.state==999" class="state">上传失败</div>
-                  <div class="progress-bar checksum" ng-style="{ 'width':file.__progress__.checksum+'%' }" ng-show="file.state<=2"></div>
-                  <div class="progress-bar upload" ng-style="{ 'width':file.__progress__.upload+'%' }" ng-show="file.state>2" ng-show="file.state<=4"></div>
+                  <div class="progress-bar checksum" ng-style="{ 'width':file.__progress__.checksum/2 + file.__progress__.upload + '%' }" ng-show="file.state<=2"></div>
                 </div>
               </div>
               <div class="col-xs-4 video-upload-control">
