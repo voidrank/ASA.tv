@@ -22,7 +22,7 @@ def myupload(request):
         lambda video: {
             'rec': video.base.rec,
             'filename': video.base.filename,
-            'play_count': video.play_count,
+            'playCount': video.play_count,
             'col': video.collection.name,
         },
         FileEXT.objects.filter(uploader=request.user).order_by('base__rec')
@@ -75,13 +75,14 @@ def getVideoToken(request, rec):
 
 def search(request, filename):
     file_list = File.objects.filter(filename__contains=filename)
-    if (getattr(settings, 'ASA_WITH_STRICT_VIDEO_AUTH', False)==True):
-        file_list = file.exclude(ext__onshow=False)
+    if (getattr(settings, 'ASA_WITH_STRICT_VIDEO_AUTH', False) is True):
+        file_list = file_list.exclude(ext__onshow=False)
     
     return JsonResponse(list(map(
         lambda __file: {
             'rec': __file.rec,
             'filename': __file.filename,
             'playCount': __file.ext.play_count,
+            'col': __file.ext.collection.name,
         },
         file_list)), safe=False)

@@ -152,7 +152,8 @@ def get_video_list(request, collection, op):
                 lambda file_: {
                     'rec': file_.base.rec,
                     'filename': file_.base.filename,
-                    'onshow': file_.onshow
+                    'onshow': file_.onshow,
+                    'playCount': file_.play_count
                 },
                 file_
             )
