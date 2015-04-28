@@ -24,6 +24,8 @@ require.config({
     'ABPlayer': 'scripts/services/ABPlayerHTML5/js/ABPlayer',
     'player': 'scripts/services/player',
     'playerStyle': 'scripts/services/ABPlayerHTML5/css/base',
+    /* jquery tool */
+    'unslider': 'bower_components/unslider/src/unslider.min',
     /* less */
     'less': 'bower_components/require-less/less',
     'lessc': 'bower_components/require-less/lessc',
@@ -64,12 +66,15 @@ require.config({
     'angular-dropdowns': {
       deps: ['angular']
     },
+    'unslider': {
+      deps: ['jquery']
+    },
   },
-//  urlArgs: 'v' + (new Date()).getTime()
+  urlArgs: 'v' + (new Date()).getTime()
 });
 
 
-define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns'], function(angular, ngRoute){
+define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns', 'unslider'], function(angular, ngRoute){
   var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngDropdowns']);
   app.config(['$routeProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', "$httpProvider", "$locationProvider", function($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider, $locationProvider){
         app.controllerProvider = $controllerProvider;

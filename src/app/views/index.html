@@ -14,65 +14,13 @@
     </div>
   </div>
 
-
-  <div class="recommandation row">
-
-    <div class="container">
-      <!-- recommandation0 -->
-      <div class="col-lg-8 col-md-12 recommandation0">
-
-        <div class="slider">
-
-          <div class="sliding-windows col-sm-3 hidden-xs">
-            <div class="row">
-              <div class="sliding-window" ng-class="{ 'active': image.visible }" ng-repeat="image in recommandation[0]">
-                <a ng-href="{{ image.link }}" target='_self'>
-                  <span class="sliding-title">{{ image.title }}</span>
-                  <br/>
-                  <span class="description">{{ image.description }}</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-9 col-xs-12" ng-repeat="image in recommandation[0]" ng-show="image.visible">
-            <div class="row">
-              <a ng-href="{{ image.link }}" target='_self'>
-                <div style=" background-image: url('{{image.src}}') " class="cover"></div>
-              </a>
-            </div>
-          </div>
-          <div class="arrows">
-            <a href="#/" ng-click="prev()">
-              <div class="glyphicon glyphicon-menu-left"></div>
-            </a>
-            <a href="#/" ng-click="next()">
-              <div class="glyphicon glyphicon-menu-right"></div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!--recommand1-->
-      <div class="col-lg-4 col-md-12 recommandation1">
-        <div class="recommandation1-container">
-          <div class="title col-sm-12">
-            <strong><span class="color-black">本周推荐</span> / Recommandation </strong>
-            <hr/>
-          </div>
-          <div ng-repeat="rcm in recommandation[1]" class="rcm col-sm-12">
-            <a ng-href="{{ rcm.link }}" href='_self'>
-              <span class="image">
-                <div style="background-image: url({{ rcm.src }})" class="cover"></div>
-              </span>
-              <span class="text">
-                <strong class="video-name">{{ rcm.title }}</strong> 
-                <p class="description">{{ rcm.description }} </p>
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
+  <div class="container">
+    <div class="banner">
+      <ul>
+        <li ng-repeat="rcm in recommandation">
+          <div style="background-image: url('{{rcm.src}}')"></div>
+        </li>
+      </ul>
     </div>
   </div>
 
