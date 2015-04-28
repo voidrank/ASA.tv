@@ -3,6 +3,7 @@ import os
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from .settings import VIDEO_COVER_DIR
 from video_cms.models import File
@@ -72,3 +73,15 @@ def getVideoToken(request, rec):
     return JsonResponse({'token': file_.token}, status=201)
 
 
+def search(request, filename):
+    file_list = File.objects.filter(filename__contains=filename)
+    if (getattr(settings, 'ASA_WITH_STRICT_VIDEO_AUTH', False)==True):
+        file_list = file.exclude(ext__onshow=False)
+    
+    return JsonResponse(list(map(
+        lambda __file: {
+            'rec': __file.rec,
+            'filename': __file.filename,
+            'playCount': __file.ext.play_count,
+        },
+        file_list)), safe=False)

@@ -39,6 +39,8 @@ urlpatterns = patterns(
     url(r'api/video/cover/(?P<rec>[0-9]+)', 'website.video_ajax.video_cover_ajax'),
     url(r'api/video/myupload/', 'website.video_ajax.myupload'),
     url(r'api/video/recToToken/(?P<rec>[0-9]+)', 'website.video_ajax.getVideoToken'),
+    # Chinese support
+    url(r'api/video/search/(?P<filename>[＼x80-＼xffa-zA-Z0-9])', 'website.video_ajax.search'),
 
     # upload
     url(r'api/upload/init/?', 'website.upload_ajax.init'),
@@ -72,4 +74,7 @@ urlpatterns = patterns(
 urlpatterns = patterns(
     '',
     url(settings.PREFIX_URL, include(urlpatterns)),
+
+    # user
+    url(r'api/user/user_log_io', 'website.user_ajax.UserLogIO')
 )

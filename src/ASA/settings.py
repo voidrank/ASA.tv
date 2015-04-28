@@ -123,3 +123,9 @@ LOGIN_URL = '/' + PREFIX_URL + 'accounts/login/'
 
 # django-guardian
 ANONYMOUS_USER_ID = -1
+
+
+# ASA individual settings
+
+# video with onshow=True can be visited
+ASA_WITH_STRICT_VIDEO_AUTH = 0
