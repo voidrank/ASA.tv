@@ -84,10 +84,11 @@
 * */api/collection/remove/admin/:collection/:username* POST
 * */api/collection/remove/member/:collection/:username* POST
 
-* */api/collection/video/:collection* GET 返回collection下的视频(offshow的视频可见，需要group_admin权限). 返回格式同*/api/video/cover/myupload*
+* */api/collection/video/:collection/:op* GET op为起始位置，返回collection下的视频(offshow的视频可见，需要group_admin权限). 返回格式同*/api/video/cover/myupload*
+	(中文支持)
 
-* */api/collection/public/:collection* GET 返回collection下的视频(offshow的视频不可见). 返回格式同*/api/video/cover/myupload*
-
+* */api/collection/public/* GET 返回所有collection的信息, 格式为
+	> [{'name': string}, {'name', string}, ...]
 
 ##### danmaku 弹幕
 

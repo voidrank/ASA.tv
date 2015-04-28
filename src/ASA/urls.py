@@ -61,7 +61,7 @@ urlpatterns = patterns(
     url(r'api/collection/remove/admin/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/', 'website.collection_ajax.remove_admin'),
     url(r'api/collection/add/root/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/', 'website.collection_ajax.add_root'),
     url(r'api/collection/remove/root/(?P<collection>[a-zA-Z0-9_]*)/(?P<username>[a-zA-Z0-9_]*)/', 'website.collection_ajax.remove_root'),
-    url(r'api/collection/video/(?P<collection>[a-zA-Z0-9_]*)/(?P<op>[0-9]*)/', 'website.collection_ajax.get_video_list'),
+    url(r'api/collection/video/(?P<collection>[＼x80-＼xffa-zA-Z0-9]*)/(?P<op>[0-9]*)/', 'website.collection_ajax.get_video_list'),
     url(r'api/collection/public', 'website.collection_ajax.public_collections'),
 
     # danmaku

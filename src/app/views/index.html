@@ -36,12 +36,11 @@
             <div class="col-xs-12 collection" ng-repeat="col in collections">
               <div class="title"><strong>{{ col.name }}</strong> / More</div>
               <div class="list row">
-                <div class="item col-sm-3 col-xs-4" ng-repeat="rcm in recommandation[3+$index]">
-                  <a ng-href="{{ rcm.link }}" target='_self' class="item">
-                    <div class="cover" style="background-image: url({{rcm.src}})"></div>
+                <div class="item col-sm-3 col-xs-4" ng-repeat="video in videos[$index]"> 
+                  <a ng-href="/rec/{{ video.rec }}" target='_self' class="item">
+                    <div class="cover" style="background-image: url('/api/video/cover/{{video.rec}}')"></div>
                     <div class="text">
-                      <strong class="video-name">{{ rcm.title }}</strong> 
-                      <p class="description">{{ rcm.description }} </p>
+                      <strong class="video-name">{{ video.filename }}</strong> 
                     </div>
                   </a>
                 </div>
