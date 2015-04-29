@@ -1,38 +1,42 @@
 <html>
 
-  <head>
-    <base href="/">
-    <script src="/app/bower_components/requirejs/require.js" data-main="/app/main.js"></script>
-  </head>
+<head>
+  <base href="/">
+  <script src="/app/bower_components/requirejs/require.js" data-main="/app/main.js"></script>
+</head>
 
-  <body>
-      <div class="header" ng-controller="header">
-        <a ng-href="{{ indexPageUrl }}">
-          <div class='logo'>
-            <img src='{{ urlPrefix }}/app/images/logo.PNG' class="img">
-          </div>
-        </a>
-        <div class="userLogIO" ng-model="userLogIO"> 
-          <div ng-show="userLogIO.authenticated">
-            <homeLink>{{ userLogIO.username }}个人中心</homeLink>&nbsp;&nbsp;&nbsp; <logoutLink>登出</logoutLink>
-          </div>
-          <div ng-hide="userLogIO.authenticated">
-            <loginLink>登陆</loginLink>/<registerLink>注册</registerLink>
-          </div>
-        </div>
+<body style="margin-top: -1000px;">
+
+  <i id="loading-page" class="loading-full-page loading-running">
+    <i class='loading-before'></i><i class='loading-after'></i>
+  </i>
+  <div class="header" ng-controller="header">
+    <a ng-href="{{ indexPageUrl }}">
+      <div class='logo'>
+        <img src='{{ urlPrefix }}/app/images/logo.PNG' class="img">
       </div>
-      <div ng-view></div>
-      <div class="footer" ng-controller="footer">
-        <div class="col-xs-1 logo">
-        </div>
-        <div class="col-sx-3 license">
-          <div class="text">
-            版权所有&nbsp复旦学生网<p><p>
-            STU All Rights reserved Copyright © 2001-2015<p>
-            LICENSE CC<p><p>
-          </div>
-        </div>
+    </a>
+    <div class="userLogIO" ng-model="userLogIO"> 
+      <div ng-show="userLogIO.authenticated">
+        <homeLink>{{ userLogIO.username }}个人中心</homeLink>&nbsp;&nbsp;&nbsp; <logoutLink>登出</logoutLink>
       </div>
-  </body>
+      <div ng-hide="userLogIO.authenticated">
+        <loginLink>登陆</loginLink>/<registerLink>注册</registerLink>
+      </div>
+    </div>
+  </div>
+  <div ng-view></div>
+  <div class="footer" ng-controller="footer">
+    <div class="col-xs-1 logo">
+    </div>
+    <div class="col-sx-3 license">
+      <div class="text">
+        版权所有&nbsp复旦学生网<p><p>
+        STU All Rights reserved Copyright © 2001-2015<p>
+        LICENSE CC<p><p>
+      </div>
+    </div>
+  </div>
+</body>
 
 </html>

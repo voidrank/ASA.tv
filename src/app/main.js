@@ -17,6 +17,8 @@ require.config({
     'bootstrap': 'bower_components/bootstrap/dist/js/bootstrap.min',
     'flat-ui': 'bower_components/flat-ui/dist/js/flat-ui.min',
     'domReady': 'bower_components/domReady/domReady',
+    'loadingjs': 'bower_components/loading.js/loading',
+    'loadingjsStyle': 'bower_components/loading.js/loading',
     /* ABPlayer */
     'ABPMobile': 'scripts/services/ABPlayerHTML5/js/ABPMobile',
     'CommentCoreLibrary': 'scripts/services/ABPlayerHTML5/js/CommentCoreLibrary',
@@ -153,8 +155,8 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns', 'un
 });
 
 define('render', 
-  ['domReady', "angular", 'app', 'jquery', 'indexController', 'headerController', 'footerController', 'homeController', 'videoPlayerController','directive'], 
-  function(domReady, angular, app, $){
+  ['domReady', "angular", 'app', 'jquery', 'loadingjs', 'indexController', 'headerController', 'footerController', 'homeController', 'videoPlayerController','directive'], 
+  function(domReady, angular, app, $, loadingjs){
     domReady(function(){
 
       // angular
@@ -166,5 +168,16 @@ define('render',
   }
 );
 
-requirejs(['render', 'css', 'css!bootstrapStyle'], function(){
+requirejs(['render', 'css', 'css!bootstrapStyle', 'css!loadingjsStyle'], function(){
+  document.getElementsByTagName('body')[0].style['margin-top'] = 0;
+  /*
+   * This is a hack
+   * At this time, angular haven't
+   * rendered html, but rendering
+   * function 'angular.bootstrap'
+   * is in the js async queue,
+   * the 'end' function will be 
+   * done after angular rendering
+   */
+  setTimeout(loading.wait(0).end('#loading-page'), 0);
 });
