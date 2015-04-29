@@ -10,7 +10,8 @@ define('player', ['ABPlayer'], function(ABPlayer){
         ],
       },
       "width":1280,
-      "height":640
+      "height":640,
+      'type': 'video/mp4',
     });
     inst.disableTime = 4;
     var cm = inst.cmManager;
