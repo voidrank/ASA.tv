@@ -12,7 +12,7 @@
 
 ==================================
 #### 依赖项
-* 后台 python==3.4.3+(python2.7.9+), python-django==1.7.1+, django-grappelli==2.6.3+, Pillow==2.7.0+
+* 后台 python==3.4.3+(python2.7.9+), python-django==1.7.1+, django-grappelli==2.6.3+, Pillow==2.7.0+, django-guardian=1.2.5+, six=1.9.0+
 * 前端 见src/app/bower.json
 
 
@@ -102,3 +102,12 @@
 	
 ##### other
 * */api/index* 首页显示。还可能会修改，暂时不写文档。
+
+# TODO
+===============================
+
+1. Remove video_cms & jquery-file-upload&& django-chunked upload
+2. Fix bug: user can't post danmaku
+3. Fix bug: player page progress does not display
+4. LICENSE: FreeBSD
+5. With django-rest-framework(In consideration). See the [idea](http://blog.kevinastone.com/getting-started-with-django-rest-framework-and-angularjs.html)
