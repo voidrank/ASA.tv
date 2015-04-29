@@ -1,6 +1,7 @@
 from django.http import JsonResponse, Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 from guardian.shortcuts import (get_objects_for_user, get_perms,
@@ -138,14 +139,16 @@ add_root = add_remove('group_root', 'add')
 # remove root to collection
 remove_root = add_remove('group_root', 'remove')
 
+
 def get_video_list(request, collection, op):
     try:
         col = Collection.objects.get(name=collection)
     except Exception:
         raise Http404("Collection '%s' doew not exists" % (collection,))
     file_ = FileEXT.objects.filter(collection=col)
-    if request.user.has_perm('admin', col):
-        file_ = file_.include(onshow=True)
+    ASA_WITH_STRICT_VIDEO_AUTH = getattr(settings, 'ASA_WITH_STRICT_VIDEO_AUTH', False)
+    if ASA_WITH_STRICT_VIDEO_AUTH and request.user.has_perm('admin', col) is False:
+        file_ = file_.exclude(onshow=False)
     return JsonResponse(
         list(
             map(
