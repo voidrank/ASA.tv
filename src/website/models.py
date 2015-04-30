@@ -56,7 +56,7 @@ class FileEXT(models.Model):
 class Danmaku(models.Model):
     id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey('auth.user')
+    user = models.ForeignKey('auth.user', blank=True, null=True)
     owner = models.ForeignKey('video_cms.File', db_index=True, on_delete=models.PROTECT)
     mode = models.IntegerField()
     stime = models.IntegerField()
@@ -74,7 +74,7 @@ class Danmaku(models.Model):
             text="",
             size=30,
             color=0xffffff):
-        assert isinstance(user, User) is True
+        # assert isinstance(user, User) is True
         assert isinstance(owner, str) is True
         assert isinstance(mode, int) is True
         assert isinstance(stime, int) is True

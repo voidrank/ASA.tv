@@ -24,9 +24,14 @@ class DanmakuView(View):
                 content_type='application/json'
             )
 
+        if getattr(settings, 'ASA_WITH_DANMAKU_AUTH', False) is True:
+            user = request.user
+        else:
+            user = None
+
         Danmaku.new(
+            user=user,
             owner=token,
-            user=request.user,
             date=int(data['date']),
             mode=int(data['mode']),
             stime=int(data['stime']),
@@ -34,6 +39,7 @@ class DanmakuView(View):
             color=data['color'],
             size=int(data['size'])
         )
+
         return JsonResponse({'status': 'OK'})
 
 
