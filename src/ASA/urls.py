@@ -3,6 +3,9 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 
+from website.upload_ajax import (ChunkedUploadView,
+                                 ChunkedUploadCompleteView)
+
 urlpatterns = patterns(
     '',
     # Examples:
@@ -43,11 +46,10 @@ urlpatterns = patterns(
     url(r'api/video/search/(?P<filename>[＼x80-＼xffa-zA-Z0-9])', 'website.video_ajax.search'),
 
     # upload
-    url(r'api/upload/init/?', 'website.upload_ajax.init'),
-    url(r'api/upload/chunk/(?P<owner>[a-fA-F0-9]{64})/?', 'website.upload_ajax.chunk'),
-    url(r'api/upload/store/(?P<owner>[a-fA-F0-9]{64})/?', 'website.upload_ajax.finalize'),
-    url(r'api/upload/destroy/(?P<owner>[a-fA-F0-9]{64}/?)', 'website.upload_ajax.destroy'),
-    url(r'api/upload/session/$', 'website.upload_ajax.session'),
+    url(r'^api/chunked_upload/?$',
+        ChunkedUploadView.as_view()),
+    url(r'^api/chunked_upload_complete/?$',
+        ChunkedUploadCompleteView.as_view()),
 
     # collection
     url(r'api/collection/is_member_of', 'website.collection_ajax.is_member_of'),

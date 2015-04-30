@@ -40,37 +40,9 @@
         <!-- tab4 uploader -->
         <div ng-show="tab[4].isActive" class="tab4" ng-controller="tab4">
 
-          <div class="file-list">
-            <div class="row-info col-xs-12"> 
-              <div class="col-xs-4 video-name">
-                视频名 
-              </div>
-              <div class="col-xs-8 video-progress">
-                控制
-              </div>
-            </div>
-            <div class="row-info col-xs-12" ng-repeat="file in allvideofiles">
-              <div class="col-xs-3 video-name" ng-click="alert(file.state);">
-                <input type="text" ng-readonly="file.state!=0" ng-model="file.config.filename">
-              </div>
-              <div class="col-xs-5 video-upload-progress">
-                <div class="progress">
-                  <div ng-show="file.state==1" class="state">等待上传</div>
-                  <div ng-show="file.state==2" class="state">正在计算校验</div>
-                  <div ng-show="file.state==3" class="state">正在上传</div>
-                  <div ng-show="file.state==4" class="state">上传完成</div>
-                  <div ng-show="file.state==999" class="state">上传失败</div>
-                  <div class="progress-bar checksum" ng-style="{ 'width':file.__progress__.checksum/2 + file.__progress__.upload + '%' }" ng-show="file.state<=2"></div>
-                </div>
-              </div>
-              <div class="col-xs-4 video-upload-control">
-                <button ng-show="file.state==0" ng-click="file.startupload()" class="col-xs-6">开始上传</button>
-                <button ng-show="file.state==999" ng-click="file.restart()" class="col-xs-6">重新上传</button>
-                <button ng-click="file.remove()" ng-show="file.state=0" ng-show="file.state==999" class="col-xs-6">删除</button>
-              </div>
-            </div>
-          </div>
-          <div ng-change="changeVideoFiles()" ng-model="videofiles" file-upload multiple class="glyphicon glyphicon-plus add"> </div>
+          <input id="chunked_upload" type="file" name="name">
+          <p id="progress"></p>
+          <div id="messages"></div>
 
           <div class="video-cover">
             <span class="word1">*</span>

@@ -1,11 +1,9 @@
 from six import with_metaclass
 
 from django.db import models
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import Group
 
 import video_cms.models
-
-from .fields import ListField
 
 # Create your models here.
 
@@ -143,13 +141,6 @@ class BasePerInfo(with_metaclass(BasePerInfoMetaclass, models.Model)):
 
 class AvatarPerInfo(BasePerInfo):
     avatar = models.ImageField(upload_to='avatar', null=True, blank=True)
-
-
-class AdvancedPerInfo(BasePerInfo):
-    default_chunksize = models.IntegerField()
-    default_path = ListField()
-
-    display = ('default_chunksize', 'default_path')
 
 
 class LoginLog(models.Model):

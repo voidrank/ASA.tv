@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'grappelli',
     'guardian',
+    'chunked_upload',
     'ASA',
     'video_cms',
     'website',
@@ -111,7 +112,7 @@ TEMPLATE_DIRS = (
 )
 
 # media url
-MEDIA_ROOT = 'app/media'
+MEDIA_ROOT = 'media'
 MEDIA_URL = '/' + PREFIX_URL + 'app/media/'
 
 # login redirect

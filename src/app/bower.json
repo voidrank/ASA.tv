@@ -19,6 +19,7 @@
     "angular-dropdowns": "~1.1.0",
     "blueimp-file-upload": "~9.9.3",
     "unslider": "~1.0.0",
-    "loading.js": "~0.0.2"
+    "loading.js": "~0.0.2",
+    "jquery-file-upload": "~9.9.3"
   }
 }

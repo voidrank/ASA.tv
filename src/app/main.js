@@ -19,6 +19,9 @@ require.config({
     'domReady': 'bower_components/domReady/domReady',
     'loadingjs': 'bower_components/loading.js/loading',
     'loadingjsStyle': 'bower_components/loading.js/loading',
+    'sparkMD5': 'bower_components/spark-md5/spark-md5.min',
+    'jquery.ui.widget': 'bower_components/jquery-file-upload/js/vendor/jquery.ui.widget',
+    'fileupload': 'bower_components/jquery-file-upload/js/jquery.fileupload',
     /* ABPlayer */
     'ABPMobile': 'scripts/services/ABPlayerHTML5/js/ABPMobile',
     'CommentCoreLibrary': 'scripts/services/ABPlayerHTML5/js/CommentCoreLibrary',
@@ -76,7 +79,7 @@ require.config({
 });
 
 
-define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns', 'unslider'], function(angular, ngRoute){
+define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns', 'unslider', 'fileupload'], function(angular, ngRoute){
   var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngDropdowns']);
   app.config(['$routeProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', "$httpProvider", "$locationProvider", function($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider, $locationProvider){
         app.controllerProvider = $controllerProvider;
@@ -95,6 +98,9 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns', 'un
         .when(urlPrefix + '/rec/:rec', {
           templateUrl: urlPrefix + '/app/views/videoPlayer.html',
         })
+        .when(urlPrefix + '/upload', {
+          templateUrl: urlPrefix + '/app/views/upload.html',
+        });
         $locationProvider.html5Mode(true);
       }])
   .constant(
