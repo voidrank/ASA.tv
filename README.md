@@ -111,3 +111,9 @@
 3. Fix bug: player page progress does not display
 4. LICENSE: FreeBSD
 5. With django-rest-framework(In consideration). See the [idea](http://blog.kevinastone.com/getting-started-with-django-rest-framework-and-angularjs.html)
+
+
+# LICENSE
+===============================
+FREEBSD
+
