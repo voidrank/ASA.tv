@@ -1,5 +1,5 @@
 """
-Django settings for ASA project.
+Django settings for demo project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -48,9 +48,8 @@ INSTALLED_APPS = (
     'grappelli',
     'guardian',
     'chunked_upload',
-    'ASA',
-    'video_cms',
-    'website',
+    'asa',
+    'demo',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -68,9 +67,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'ASA.urls'
+ROOT_URLCONF = 'demo.urls'
 
-WSGI_APPLICATION = 'ASA.wsgi.application'
+WSGI_APPLICATION = 'demo.wsgi.application'
 
 
 # Database
@@ -123,7 +122,7 @@ LOGIN_URL = '/' + PREFIX_URL + 'accounts/login/'
 ANONYMOUS_USER_ID = -1
 
 
-# ASA individual settings
+# demo individual settings
 
 # video with onshow=True can be visited
 ASA_WITH_STRICT_VIDEO_AUTH = 0

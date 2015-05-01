@@ -6,8 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
 from .settings import VIDEO_COVER_DIR
-from video_cms.models import File
-from .models import FileEXT
 
 
 @login_required

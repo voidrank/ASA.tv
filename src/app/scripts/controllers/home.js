@@ -87,8 +87,19 @@ define('homeController', ['app', 'jquery', 'UploadVideoCover', 'sparkMD5', 'fact
                         maxChunkSize: 100000, // Chunks of 100kB
                         add: function (e, data) { // Called before starting upload
                             $('#messages').empty();
+                            form_data.splice(0, form_data.length);
                             calculate_md5(data.files[0], 100000); // Again, chunks of 100kB
-                            data.submit();
+                            data.context = $('<button class="btn btn-primary"><i class="glyphicon glyphicon-upload"></i><span>Start Upload</span></span></button>').text('Upload')
+                                .appendTo($('#video-uploader'))
+                                .click(function() {
+                                    if ($scope.collection.selected.name === '请选择'){
+                                        alert("Please choose a collection first")
+                                        return;
+                                    }
+                                    data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+                                    form_data['collection'] = $scope.collection.selected.name;
+                                    data.submit();
+                                });
                         },
                         chunkdone: function (e, data) { // Called after uploading each chunk
                             if (form_data.length <= 1) {
@@ -96,23 +107,39 @@ define('homeController', ['app', 'jquery', 'UploadVideoCover', 'sparkMD5', 'fact
                                     {"name": "upload_id", "value": data.result.upload_id}
                                 );
                             }
-                            $('#messages').append($('<p>').text(JSON.stringify(data.result)));
+                            console.log(data);
                             var progress = parseInt(data.loaded / data.total * 100.0, 10);
-                            $("#progress").text(Array(progress).join("=") + "> " + progress + "%");
+                            $("#video-progress").text(progress + '%');
+                            $("#video-progress").css("width", progress+'%');
                         },
                         done: function (e, data) { // Called when the file has completely uploaded
+                            console.log(data);
                             $.ajax({
                                 type: "POST",
                                 url: apiUrl + '/chunked_upload_complete/',
                                 data: {
                                     upload_id: data.result.upload_id,
                                     md5: md5,
+                                    collection: form_data.collection,
+                                    filename: data.files[0].name,
                                 },
                                 dataType: "json",
-                                success: function (data) {
-                                    $("#messages").append($('<p>').text(JSON.stringify(data)));
+                                success: function (res) {
+                                    data.context.text('Upload finished.');
+                                    uploadVideoCover.startUpload(res.rec);
                                 },
                             });
+                        },
+                        progressall: function(e, data) {
+                            var progress = parseInt(data.loaded / data.total * 100, 10);
+                            $('#progress .bar').css(
+                                'width',
+                                progress + '%'
+                            );
+                        },
+                        fail: function(e, data) { // called when upload fails
+                            alert(e);
+                            data.context.text('Failed');
                         }
                     });
                 }, 0);
