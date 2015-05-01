@@ -1620,7 +1620,7 @@ define("ABPlayer", function(){
                     "className": "right ABP-TimeLabel",
                   }),
                   _("div", {
-                    "className": "progress-bar autofill",
+                    "className": "ABP-progress-bar autofill",
                   }),
                     ]),
                     ]),
@@ -1907,7 +1907,7 @@ define("ABPlayer", function(){
       /* start binding */
       ABPInst.videos = playerUnit.getElementsByClassName("ABP-VideoItem");
       ABPInst.btnPlay = playerUnit.getElementsByClassName("ABP-Play")[0];
-      ABPInst.barProgress = makebar(playerUnit.getElementsByClassName("progress-bar")[0],null);
+      ABPInst.barProgress = makebar(playerUnit.getElementsByClassName("ABP-progress-bar")[0],null);
       ABPInst.btnFullWin = playerUnit.getElementsByClassName("ABP-FullWindow")[0];
       ABPInst.btnFullScr = playerUnit.getElementsByClassName("ABP-FullScreen")[0];
       ABPInst.btnWide = playerUnit.getElementsByClassName("ABP-WideScreen")[0];

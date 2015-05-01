@@ -235,7 +235,7 @@
 }
 
 /* progress bar */
-.ABP-Unit .ABP-Control .progress-bar .dark {
+.ABP-Unit .ABP-Control .ABP-progress-bar .dark {
 	background-color:#007caf;
 }
 
