@@ -20,6 +20,8 @@
 ==================================
 安装python依赖项
 
+首先安装python
+
 ubuntu下
 
 > apt-get install python
@@ -28,6 +30,7 @@ mac下
 
 > brew install python 
 
+然后
 > pip install django django-grappelli Pillow django-guardian six
 
 > git clone https://github.com/voidrank/ASA.tv.git
