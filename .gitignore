@@ -59,12 +59,11 @@ src/Upload/test_file
 src/video_cms/chunks
 src/video_cms/files
 src/db.sqlite3
-src/website/media
+src/asa/media
 src/userinfo/avatar
-src/website/nodejs/log.html
-src/website/nodejs/node_modules
-src/website/media
-src/website/video_cover
+src/asa/nodejs/log.html
+src/asa/nodejs/node_modules
+src/asa/video_cover
 *.ropeproject
 *migrations
 
@@ -72,7 +71,7 @@ src/website/video_cover
 *bower_components
 
 #static image
-src/app/media/
+src/media/
 
 # webstorm
 src/app/.idea

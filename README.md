@@ -10,10 +10,47 @@
 * 欢迎加入
 
 
+
 ==================================
 #### 依赖项
 * 后台 python==3.4.3+(python2.7.9+), python-django==1.7.1+, django-grappelli==2.6.3+, Pillow==2.7.0+, django-guardian=1.2.5+, six=1.9.0+
 * 前端 见src/app/bower.json
+
+安装
+==================================
+安装python依赖项
+
+ubuntu下
+
+> apt-get install python
+
+mac下
+
+> brew install python 
+
+> pip install django django-grappelli Pillow django-guardian six
+
+> git clone https://github.com/voidrank/ASA.tv.git
+
+> cd ASA.tv/src/app
+
+> bower install
+
+> cd ..
+
+> python manage.py makemigrations website video_cms
+
+> python manage.py migrate
+
+> python manage.py createsuperuser
+
+接下来输入你的superuser的注册信息。
+创建超级用户成功，输入下面代码使得服务器运行。
+
+> python manage.py runserver
+
+在浏览器中访问localhost:8000/
+
 
 
 ======
