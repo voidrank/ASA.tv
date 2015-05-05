@@ -60,6 +60,7 @@ src/video_cms/chunks
 src/video_cms/files
 src/db.sqlite3
 src/asa/media
+src/app/media
 src/userinfo/avatar
 src/asa/nodejs/log.html
 src/asa/nodejs/node_modules
