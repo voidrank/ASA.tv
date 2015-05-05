@@ -8,7 +8,7 @@
           <a href="{{urlPrefix}}"><strong>首页</strong></a>
         </li>
         <li role="presentation" class="col-md-2 col-lg-1" ng-repeat="col in collections track by $index">
-          <a ng-href="{{ collectionUrl }}{{ col.name }}"><strong>{{ col.name }}</strong></a>
+	      <a ng-href="/collection/{{ col.name }}"><strong>{{ col.name }}</strong></a>
         </li>
       </ul>
     </div>
