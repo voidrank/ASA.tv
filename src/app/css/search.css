@@ -1,0 +1,47 @@
+.information{
+    font-size:10px;
+}
+.container .row .col-lg-12 .title{
+    height: 32px;
+    margin-top:20px;
+    margin-bottom: 10px;
+    text-align: left;
+    font-size: 20px;
+    color: #E94436;
+    text-transform: uppercase;
+    border-bottom: 2px solid #e94436;
+}
+.container .row .col-lg-12 .title .charaterStyle{
+
+    background-color: #E94436 ;
+    color:white;
+    padding: 6px;
+    box-sizing: border-box;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Source Han Sans', 'Source Han Sans CN', 'Open Sans', 'Lucida Grande', 'Segoe UI', Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+.result1 .col-lg-4{
+}
+.space{
+    height:40px;
+}
+.titleStyle{
+    color:black;
+    font-size:20px;
+}
+.backgroundGray{
+    background-color: #F7F7F7;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+}
+.watch-button{
+    margin-top:100px;
+}
+.about{
+    margin-top:5px;
+    margin-bottom: 30px;
+}
+.introductionStyle{
+    /* to do */
+}
