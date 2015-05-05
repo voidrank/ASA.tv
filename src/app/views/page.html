@@ -1,0 +1,91 @@
+
+<div ng-controller='page' class='page'>
+
+  <div class="row navigation">
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="col-md-2 col-lg-1">
+          <a href="{{urlPrefix}}"><strong>首页</strong></a>
+        </li>
+        <li role="presentation" class="col-md-2 col-lg-1" ng-repeat="col in collections track by $index">
+          <a ng-href="{{ collectionUrl }}{{ col.name }}"><strong>{{ col.name }}</strong></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-sm-12 content">
+
+        <div class="row">
+
+          <div class="col-md-8 collection">
+
+            <div class="row">
+
+              <div class="col-lg-3 col-md-4 col-sm-6 collection" ng-repeat="video in show">
+                <a ng-href="/rec/{{ video.rec }}" target="_self" class="item">
+                  <!--img src="url('stu.fudan.edu.cn/asa/api/video/cover/1')" class="img-thumbnail"-->
+	                <img src="url('/api/video/cover/{{video.rec}}')" class="img-thumbnail">
+
+	                <div class="text" >
+                    <strong class="video-name">{{ video.filename }}</strong>
+                    <p class="text-muted">此处应有介绍</p>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+
+            <!--p>{{currentPage}}</p>
+            <p>{{pages}}</p>
+            <p>{{totalPage}}</p-->
+            <nav style="text-align: center">
+              {{load();}}
+              <ul class="pagination" ng-show="totalPage>1">
+                <li>
+                  <a href="#" ng-click="prev()">&laquo;</a>
+                </li>
+
+                <li ng-class="{true:'active'}[currentPage==$index]" ng-repeat="page in pages">
+                  <a href="#" ng-click="loadPage(page)">{{ page+1 }}</a>
+                </li>
+
+                <li>
+                  <a href="#" ng-click="next()">&raquo;</a>
+                </li>
+
+              </ul>
+            </nav>
+          </div>
+
+          <div class="col-md-4 rank-list">
+            <div class="title">
+                  <span class="word1">
+                    <strong>本区排行</strong>
+                  </span>
+                  <span class="word2">
+                    <strong>/ RANKING</strong>
+                  </span>
+              <hr/>
+            </div>
+            <a class="item" ng-repeat="rcm in rank | orderBy: '-playCount' | limitTo: 5 " ng-href="{{ playerUrl }}{{ rcm.rec }}">
+              <div class="rank">{{ $index+1 }}</div>
+              <div class="text">
+                  <div class="video-name">{{ rcm.filename }}</div>
+	              <div class="text-muted">播放数:{{ rcm.playCount }}</div>
+                </div>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
