@@ -75,3 +75,4 @@ src/media/
 
 # webstorm
 src/app/.idea
+.idea
