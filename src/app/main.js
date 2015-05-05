@@ -43,6 +43,7 @@ require.config({
     'footerController': 'scripts/controllers/footer',
     'indexController': 'scripts/controllers/index',
     'homeController': 'scripts/controllers/home',
+    'pageController': 'scripts/controllers/page',
     'videoPlayerController': 'scripts/controllers/videoPlayer',
     /* bootstrap */
     'bootstrapStyle': 'bower_components/bootstrap/dist/css/bootstrap.min',
@@ -51,6 +52,7 @@ require.config({
     'footerStyle': 'less/footer',
     'homeStyle': 'less/home',
     'headerStyle': 'less/header',
+    'pageStyle': 'less/page',
   },
   shim: {
     'angular': {
@@ -89,12 +91,16 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns', 'un
         .when(urlPrefix + '/', {
           templateUrl: urlPrefix + '/app/views/index.html',
         })
-        .when(urlPrefix + '/home/', {
+        .when(urlPrefix + '/homee/', {
           templateUrl: urlPrefix + '/app/views/home.html',
         })
         .when(urlPrefix + '/rec/:rec', {
           templateUrl: urlPrefix + '/app/views/videoPlayer.html',
         })
+
+        .when(urlPrefix + '/:col', {
+          templateUrl: urlPrefix+ '/app/views/page.html',
+        });
         $locationProvider.html5Mode(true);
       }])
   .constant(
@@ -155,7 +161,7 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns', 'un
 });
 
 define('render', 
-  ['domReady', "angular", 'app', 'jquery', 'loadingjs', 'indexController', 'headerController', 'footerController', 'homeController', 'videoPlayerController','directive'], 
+  ['domReady', "angular", 'app', 'jquery', 'loadingjs', 'indexController', 'headerController', 'footerController', 'homeController', 'videoPlayerController','pageController','directive'],
   function(domReady, angular, app, $, loadingjs){
     domReady(function(){
 
