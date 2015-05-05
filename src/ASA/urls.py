@@ -27,7 +27,8 @@ urlpatterns = patterns(
     # angularjs app
     url(r'^$', 'ASA.views.app'),
     url(r'^home/$', 'ASA.views.app'),
-    url(r'rec/[0-9]+', 'ASA.views.app'),
+    url(r'^rec/[0-9]+$', 'ASA.views.app'),
+    url(r'^collection/.*$', 'ASA.views.app'),
 
 
     # AJAX

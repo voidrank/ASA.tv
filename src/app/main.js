@@ -91,14 +91,13 @@ define('app', ['angular', 'ngRoute', 'angular-animate', 'angular-dropdowns', 'un
         .when(urlPrefix + '/', {
           templateUrl: urlPrefix + '/app/views/index.html',
         })
-        .when(urlPrefix + '/homee/', {
+        .when(urlPrefix + '/home/', {
           templateUrl: urlPrefix + '/app/views/home.html',
         })
         .when(urlPrefix + '/rec/:rec', {
           templateUrl: urlPrefix + '/app/views/videoPlayer.html',
         })
-
-        .when(urlPrefix + '/:col', {
+        .when(urlPrefix + '/collection/:col', {
           templateUrl: urlPrefix+ '/app/views/page.html',
         });
         $locationProvider.html5Mode(true);
