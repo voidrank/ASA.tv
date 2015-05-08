@@ -29,6 +29,7 @@ urlpatterns = patterns(
     url(r'^home/$', 'ASA.views.app'),
     url(r'^rec/[0-9]+$', 'ASA.views.app'),
     url(r'^collection/.*$', 'ASA.views.app'),
+    url(r'^search$', 'ASA.views.app'),
 
 
     # AJAX
